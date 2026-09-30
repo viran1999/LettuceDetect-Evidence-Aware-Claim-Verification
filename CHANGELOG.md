@@ -1,0 +1,145 @@
+# Changelog
+
+All notable changes to LettuceDetect are documented here.
+
+## [0.2.3] - 2026-08-14
+
+### Added
+- `lettucedetect` command-line entry point: file/stdin/literal inputs, spans or tokens JSON output, transformer and LLM methods (#47, thanks @SemTiOne)
+- Detector latency/throughput benchmark script with context-length sweep and peak-memory reporting (#58, thanks @sanmaxdev)
+- Claude Code integration: a Stop hook that checks agent answers against grounding context and feeds flagged spans back to the agent; API, in-process, and generative (vLLM) modes (#50)
+- Custom zero-shot taxonomies: `include_taxonomy` accepts `{name: description}` label sets on the taxonomy-head cascade and the native generative detector; labels enter as text, so unseen labels type from their description (#92)
+- Typed spans in the Streamlit demo: model selector, per-category colors, span table (#57, thanks @w3lld1)
+
+### Fixed
+- `LLMDetector` honors `output_format="tokens"` across all three predict entry points (#65, thanks @mobinert)
+- Corrected published model ids in the CLI help and docs; the multilingual EuroBERT models are documented as one checkpoint per language with the `transformers<5` note (#33)
+- `zero_shot`, `fewshot_path`, and `prompt_path` now raise on native generative detectors instead of being silently ignored (#92)
+
+### Documentation
+- Public roadmap (`PUBLIC_ROADMAP.md`) with milestone-linked Now/Next/Exploring sections
+- `min_confidence` edge cases documented (#64, thanks @vku2018)
+
+## [0.2.2] - 2026-07-05
+
+### Fixed
+- `method="llm"` crashed with `AttributeError: '_validate_min_confidence'` on every `predict` call — `LLMDetector` now subclasses `BaseDetector` like the other detectors, with a hierarchy regression test (#68)
+
+## [0.2.1] - 2026-07-02
+
+### Added
+- `min_confidence` threshold on `predict` / `predict_prompt` / `predict_prompt_batch` — drops spans below the given confidence, `0.0` (default) keeps everything (#62, thanks @Aditya20029)
+- Contributor infrastructure: issue forms with native GitHub issue types, PR template with contribution-rights attestation (CI-enforced), Contributor Covenant Code of Conduct (#61, thanks @sanmaxdev)
+
+### Fixed
+- `HallucinationSample.from_json` no longer requires `dataset` and `language` fields (#54)
+- PyPI artifacts now ship only package code and prompt data
+
+## [0.2.0] - 2026-06-22
+
+### Added
+- **Code, tool-output and agentic-workflow hallucination detection** — a new family of v2 detectors trained on a unified span-level benchmark spanning SWE-bench coding-agent traces, developer tool output and structured documents (ACL / README / Wikipedia), alongside RAGTruth and 14-language PsiloQA:
+  - `lettucedect-v2-qwen-2b` — generative detector that emits **typed** hallucination spans (category + subcategory) in a single pass, with optional reasoning
+  - `lettucedect-v2-mmbert-base` — fast encoder detector (binary token-level spans)
+  - `lettucedect-v2-taxonomy-head` — label-conditioned typing head that types encoder spans without a generative model
+- **Typed encoder cascade** — `TransformerDetector(taxonomy_head=...)` attaches a `category`/`subcategory` to each binary span via the taxonomy head (`HallucinationDetector(method="transformer", model_path=..., taxonomy_head=...)`)
+- **Native generative-detector support in `LLMDetector`** — auto-detects the v2 generative models and routes them to their detection prompt with structured typed-span output
+- Automatic context chunking for long inputs — when context exceeds `max_length`, passages are split into groups and scored independently with `max()` aggregation
+- Hungarian language support (prompts and summary templates)
+- GitHub Pages documentation site with KR Labs branding
+- `CONTRIBUTING.md` for new contributors
+
+### Fixed
+- `answer_start_token` bug in `prepare_tokenized_input` — previously computed from context side, which gave wrong results when context was truncated; now computed from answer side
+- `predict_prompt()` now warns when input exceeds `max_length` instead of silently truncating
+
+### Changed
+- CI lint job runs standalone (only needs ruff, no heavy deps)
+- Modernized type hints across codebase (`list[str]` instead of `List[str]`)
+- Replaced `print()` with `logging` in LLM detector
+- Cleaned up duplicate test fixtures
+
+## [0.1.8] - 2025-08-31
+
+### Added
+- RAGFactChecker integration for triplet-based hallucination detection
+- Hallucination generation pipeline for synthetic training data
+- LangChain integration (callbacks, chains, tools)
+- Elysia framework integration
+- TinyLettuce — smaller distilled model variants
+- MkDocs documentation site
+- Batch processing support for RAGFactChecker
+
+## [0.1.7] - 2025-05-15
+
+### Added
+- Web API with FastAPI and async Python client (`lettucedetect_api/`)
+- LLM-based hallucination detection using OpenAI API
+- Multilingual support (German, French, Spanish, Italian, Polish, Chinese)
+- RAGBench dataset preprocessing and training
+- EuroBERT model support (8K context window)
+- AUROC evaluation metric
+- Caching for LLM API calls
+
+### Changed
+- Restructured detectors into factory pattern (`make_detector()`)
+- Added seed to training for reproducibility
+
+### Fixed
+- Tensor copying bug in inference
+- Encoder SEP token handling
+
+## [0.1.6] - 2025-02-27
+
+### Changed
+- Migrated to `pyproject.toml` (removed setup.py)
+- Added Ruff for linting and formatting
+- Set up GitHub Actions CI/CD
+
+## [0.1.5] - 2025-02-22
+
+### Changed
+- Improved token-level inference mapping
+
+## [0.1.4] - 2025-02-12
+
+### Changed
+- README improvements
+
+## [0.1.3] - 2025-02-12
+
+### Added
+- First interactive demo
+
+## [0.1.2] - 2025-02-11
+
+### Added
+- `HallucinationDetector` interface — the main public API
+- Character-level evaluation
+
+## [0.1.1] - 2025-02-10
+
+### Fixed
+- Package distribution (included `preprocess` subpackage)
+
+## [0.1.0] - 2025-02-09
+
+### Added
+- Initial release
+- RAGTruth preprocessing pipeline
+- First trained hallucination detection model (ModernBERT-base, 6 epochs)
+- Token classification for hallucination span detection
+
+[Unreleased]: https://github.com/KRLabsOrg/LettuceDetect/compare/v0.2.2...HEAD
+[0.2.2]: https://github.com/KRLabsOrg/LettuceDetect/compare/v0.2.1...v0.2.2
+[0.2.1]: https://github.com/KRLabsOrg/LettuceDetect/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/KRLabsOrg/LettuceDetect/compare/0.1.8...v0.2.0
+[0.1.8]: https://github.com/KRLabsOrg/LettuceDetect/compare/0.1.7...0.1.8
+[0.1.7]: https://github.com/KRLabsOrg/LettuceDetect/compare/0.1.6...0.1.7
+[0.1.6]: https://github.com/KRLabsOrg/LettuceDetect/compare/0.1.5...0.1.6
+[0.1.5]: https://github.com/KRLabsOrg/LettuceDetect/compare/0.1.4...0.1.5
+[0.1.4]: https://github.com/KRLabsOrg/LettuceDetect/compare/0.1.3...0.1.4
+[0.1.3]: https://github.com/KRLabsOrg/LettuceDetect/compare/0.1.2...0.1.3
+[0.1.2]: https://github.com/KRLabsOrg/LettuceDetect/compare/0.1.1...0.1.2
+[0.1.1]: https://github.com/KRLabsOrg/LettuceDetect/compare/0.1.0...0.1.1
+[0.1.0]: https://github.com/KRLabsOrg/LettuceDetect/releases/tag/0.1.0
