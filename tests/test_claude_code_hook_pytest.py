@@ -85,9 +85,7 @@ class TestFormatReport:
 
     def test_multiple_spans_counted(self):
         """Test multiple spans counted."""
-        report = format_report(
-            [{"text": "a", "confidence": 0.9}, {"text": "b", "confidence": 0.8}]
-        )
+        report = format_report([{"text": "a", "confidence": 0.9}, {"text": "b", "confidence": 0.8}])
         assert "2 unsupported span(s)" in report
 
 
