@@ -7,7 +7,6 @@ from unittest.mock import patch
 
 import pytest
 
-
 from lettucedetect.integrations.claude_code.check_answer import (
     format_report,
     load_context,
@@ -86,7 +85,9 @@ class TestFormatReport:
 
     def test_multiple_spans_counted(self):
         """Test multiple spans counted."""
-        report = format_report([{"text": "a", "confidence": 0.9}, {"text": "b", "confidence": 0.8}])
+        report = format_report(
+            [{"text": "a", "confidence": 0.9}, {"text": "b", "confidence": 0.8}]
+        )
         assert "2 unsupported span(s)" in report
 
 
@@ -177,7 +178,6 @@ class TestMain:
     def test_api_mode_uses_client(self, tmp_path, capsys):
         """Test API mode with a mocked detector."""
         ctx = self.make_context(tmp_path)
-
         fake_spans = [
             {
                 "text": "69 million",
@@ -186,20 +186,17 @@ class TestMain:
                 "end": 10,
             }
         ]
-
         with (
             patch(
                 "sys.stdin",
-                io.StringIO(
-                    json.dumps({"transcript_path": str(FIXTURE)})
-                ),
+                io.StringIO(json.dumps({"transcript_path": str(FIXTURE)})),
             ),
             patch(
                 "lettucedetect.integrations.claude_code.check_answer.detect_spans_api",
                 return_value=fake_spans,
             ),
         ):
-        code = main(["--api-url", "http://x", "--context-file", ctx])
+            code = main(["--api-url", "http://x", "--context-file", ctx])
 
         assert code == 2
         assert "0.97" in capsys.readouterr().err
@@ -225,7 +222,10 @@ class TestMain:
                 ]
 
         with (
-            patch("sys.stdin", io.StringIO(json.dumps({"transcript_path": str(FIXTURE)}))),
+            patch(
+                "sys.stdin",
+                io.StringIO(json.dumps({"transcript_path": str(FIXTURE)})),
+            ),
             patch("lettucedetect.models.inference.HallucinationDetector", StubDetector),
         ):
             code = main(
