@@ -199,13 +199,10 @@ class TestMain:
                 return_value=fake_spans,
             ),
         ):
-            code = main(
-                ["--api-url", "http://x", "--context-file", ctx]
-            )
+        code = main(["--api-url", "http://x", "--context-file", ctx])
 
         assert code == 2
         assert "0.97" in capsys.readouterr().err
-
 
     def test_llm_mode_passes_base_url_and_reports_typed_spans(self, tmp_path, capsys):
         """Test llm mode passes base url and reports typed spans."""
