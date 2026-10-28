@@ -6,7 +6,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 import pytest
-import lettucedetect_api.client
+
 
 from lettucedetect.integrations.claude_code.check_answer import (
     format_report,
@@ -175,37 +175,37 @@ class TestMain:
             assert main(["--model-path", "stub"]) == 0
 
     def test_api_mode_uses_client(self, tmp_path, capsys):
-        """Test api mode uses client."""
+        """Test API mode with a mocked detector."""
         ctx = self.make_context(tmp_path)
 
-        class StubItem:
-            """Stub API span item."""
-
-            def model_dump(self):
-                return {"text": "69 million", "hallucination_score": 0.97, "start": 0, "end": 10}
-
-        class StubResponse:
-            """Stub span response."""
-
-            predictions = (StubItem(),)
-
-        class StubClient:
-            """Stub HTTP client."""
-
-            def __init__(self, url):
-                self.url = url
-
-            def detect_spans(self, contexts, question, answer):
-                assert contexts and answer
-                return StubResponse()
+        fake_spans = [
+            {
+                "text": "69 million",
+                "hallucination_score": 0.97,
+                "start": 0,
+                "end": 10,
+            }
+        ]
 
         with (
-            patch("sys.stdin", io.StringIO(json.dumps({"transcript_path": str(FIXTURE)}))),
-            patch("lettucedetect_api.client.LettuceClient", StubClient),
+            patch(
+                "sys.stdin",
+                io.StringIO(
+                    json.dumps({"transcript_path": str(FIXTURE)})
+                ),
+            ),
+            patch(
+                "lettucedetect.integrations.claude_code.check_answer.detect_spans_api",
+                return_value=fake_spans,
+            ),
         ):
-            code = main(["--api-url", "http://x", "--context-file", ctx])
+            code = main(
+                ["--api-url", "http://x", "--context-file", ctx]
+            )
+
         assert code == 2
         assert "0.97" in capsys.readouterr().err
+
 
     def test_llm_mode_passes_base_url_and_reports_typed_spans(self, tmp_path, capsys):
         """Test llm mode passes base url and reports typed spans."""
