@@ -43,6 +43,63 @@ def load_rank_one_records(file_path):
     return records
 
 
+def categorize_atomic_claims(predictions):
+    """
+    Combine NLI predictions for multiple atomic claims.
+
+    predictions: list of NLI labels such as
+    ["entailment", "neutral", "entailment"]
+    """
+
+    if not predictions:
+        raise ValueError("No atomic predictions provided")
+
+    predictions = [p.lower() for p in predictions]
+
+    valid_labels = {
+        "entailment",
+        "contradiction",
+        "neutral"
+    }
+
+    if any(p not in valid_labels for p in predictions):
+        raise ValueError("Unknown NLI label")
+
+    supported = predictions.count("entailment")
+    contradicted = predictions.count("contradiction")
+    neutral = predictions.count("neutral")
+
+    # Mixed supported and contradicted facts require review.
+    if supported > 0 and contradicted > 0:
+        category = None
+        status = "needs_review"
+
+    elif contradicted > 0:
+        category = "Contradicted"
+        status = "provisional"
+
+    elif supported == len(predictions):
+        category = "Supported"
+        status = "provisional"
+
+    elif supported > 0 and neutral > 0:
+        category = "Partially Supported"
+        status = "provisional"
+
+    else:
+        category = "Unverifiable"
+        status = "provisional"
+
+    return {
+        "category": category,
+        "status": status,
+        "supported_count": supported,
+        "contradicted_count": contradicted,
+        "neutral_count": neutral,
+        "total_atomic_claims": len(predictions)
+    }
+
+
 if __name__ == "__main__":
 
     input_path = "data/verification/categorization_input_v2.jsonl"
