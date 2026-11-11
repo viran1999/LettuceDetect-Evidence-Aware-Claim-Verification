@@ -2,6 +2,22 @@ import json
 import streamlit as st
 
 
+# Colors for the final verdict
+VERDICT_COLORS = {
+    "Supported": "green",
+    "Partially Supported": "orange",
+    "Contradicted": "red",
+    "Unverifiable": "gray",
+}
+
+# Icons and words for each small piece (atomic claim)
+RELATION_LABELS = {
+    "entailment": ("🟢", "agrees with the evidence"),
+    "neutral": ("🟡", "not mentioned in the evidence"),
+    "contradiction": ("🔴", "disagrees with the evidence"),
+}
+
+
 def safe(text):
     # Streamlit treats $ as a math sign, so we escape it
     return str(text).replace("$", "\\$")
@@ -57,3 +73,22 @@ if uploaded:
             st.markdown(f"📄 **Evidence #{verification.get('evidence_rank', 1)} (Hybrid v2)**")
             st.info(safe(verification.get("evidence", "No evidence found.")))
             st.caption(f"Ranking score: {verification.get('ranking_score', 0):.2f}")
+
+            # Part 4: the verdict (the Judge)
+            st.markdown("👨‍⚖️ **Verdict**")
+            category = verification.get("category", "Unknown")
+            st.badge(category, color=VERDICT_COLORS.get(category, "blue"))
+            st.write(
+                f"{verification.get('supported_count', 0)} of "
+                f"{verification.get('total_atomic_claims', 0)} small claims are supported by the evidence."
+            )
+
+            # Part 5: each small piece of the claim
+            for piece in verification.get("atomic_verifications", []):
+                relation = piece.get("nli_relation", "")
+                icon, meaning = RELATION_LABELS.get(relation, ("⚪", relation))
+                score = piece.get("nli_scores", {}).get(relation, 0)
+                st.markdown(f"{icon} {safe(piece.get('atomic_claim', ''))} — *{meaning}* ({score:.0%} sure)")
+
+            if verification.get("status") == "provisional":
+                st.caption("Note: this verdict is provisional (still being improved).")
