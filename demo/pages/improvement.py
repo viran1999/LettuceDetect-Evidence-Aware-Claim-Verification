@@ -1,46 +1,11 @@
-
-# import streamlit as st
-
-# st.set_page_config(page_title="Improvement", page_icon="✨")
-
-# st.title("Improve Your Answer")
-# st.write("Use this page to improve answers and make them more reliable.")
-
-# st.subheader("Context")
-# context = st.text_area(
-#     "Enter the reference context",
-#     value="Jupiter is the largest planet in our solar system. It has a Great Red Spot, which is a giant storm. Jupiter takes approximately 12 Earth years to complete one orbit around the Sun.",
-#     height=150,
-#     key="improvement_context"
-# )
-
-# st.subheader("Question")
-# question = st.text_area(
-#     "Enter your question",
-#     value="Which is the largest planet in our solar system, and how long does it take to orbit the Sun?",
-#     height=100,
-#     key="improvement_question"
-# )
-
-# st.subheader("Original Answer")
-# answer = st.text_area(
-#     "Enter the answer",
-#     value="Saturn is the largest planet in our solar system. It takes approximately 29 Earth years to complete one orbit around the Sun.",
-#     height=150,
-#     key="improvement_answer"
-# )
-
-# if st.button("Improve Answer"):
-#     st.info("Improvement functionality will be implemented in the next step.")
-
-
-
 import streamlit as st
 import streamlit.components.v1 as components
 
+import json
+from pathlib import Path
+
 from html import escape
 from typing import Any
-
 from lettucedetect.models.inference import HallucinationDetector
 
 
@@ -291,73 +256,176 @@ answer = st.text_area(
 # ORIGINAL HALLUCINATION DETECTION
 # --------------------------------------------------
 
+# ****************************************************************************
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# if st.button("Detect Hallucinations"):
+
+#     with st.spinner("Detecting hallucinations..."):
+
+#         predictions = detector.predict(
+#             context=[context],
+#             question=question,
+#             answer=answer,
+#             output_format="spans"
+#         )
+
+#     st.subheader("Hallucination Detection Results")
+
+#     if any(prediction.get("category") for prediction in predictions):
+#         st.markdown(
+#             create_legend_html(),
+#             unsafe_allow_html=True
+#         )
+
+#     html_content = create_interactive_text(
+#         answer,
+#         predictions
+#     )
+
+#     components.html(
+#         html_content,
+#         height=200,
+#         scrolling=True
+#     )
+
+#     if predictions:
+
+#         rows = [
+#             {
+#                 "start": prediction.get("start"),
+#                 "end": prediction.get("end"),
+#                 "text": prediction.get(
+#                     "text",
+#                     answer[
+#                         prediction["start"]:prediction["end"]
+#                     ]
+#                 ),
+#                 "category": prediction.get(
+#                     "category", "untyped"
+#                 ),
+#                 "subcategory": prediction.get(
+#                     "subcategory", ""
+#                 ),
+#                 "confidence": prediction.get("confidence"),
+#             }
+#             for prediction in predictions
+#         ]
+
+#         st.subheader("Detected Span Details")
+
+#         st.dataframe(
+#             rows,
+#             hide_index=True,
+#             use_container_width=True
+#         )
+#     else:
+#         st.success("No hallucinated spans detected.")
+
+# *******************************************************************************************
+# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+# --------------------------------------------------
+# ORIGINAL HALLUCINATION DETECTION + SAVE RESULTS
+# --------------------------------------------------
+
+
 if st.button("Detect Hallucinations"):
 
-    with st.spinner("Detecting hallucinations..."):
+    try:
+        with st.spinner("Detecting hallucinations..."):
 
-        predictions = detector.predict(
-            context=[context],
-            question=question,
-            answer=answer,
-            output_format="spans"
-        )
+            predictions = detector.predict(
+                context=[context],
+                question=question,
+                answer=answer,
+                output_format="spans",
+            )
 
-    st.subheader("Hallucination Detection Results")
-
-    if any(prediction.get("category") for prediction in predictions):
-        st.markdown(
-            create_legend_html(),
-            unsafe_allow_html=True
-        )
-
-    html_content = create_interactive_text(
-        answer,
-        predictions
-    )
-
-    components.html(
-        html_content,
-        height=200,
-        scrolling=True
-    )
-
-    if predictions:
-
-        rows = [
-            {
-                "start": prediction.get("start"),
-                "end": prediction.get("end"),
-                "text": prediction.get(
-                    "text",
-                    answer[
-                        prediction["start"]:prediction["end"]
-                    ]
-                ),
-                "category": prediction.get(
-                    "category", "untyped"
-                ),
-                "subcategory": prediction.get(
-                    "subcategory", ""
-                ),
-                "confidence": prediction.get("confidence"),
+            # Prepare baseline results
+            output = {
+                "model_id": MODEL_OPTIONS[model_label]["model_path"],
+                "context": [context],
+                "question": question,
+                "examples": [
+                    {
+                        "name": "Current answer",
+                        "answer": answer,
+                        "predicted_spans": predictions,
+                    }
+                ],
             }
-            for prediction in predictions
-        ]
 
-        st.subheader("Detected Span Details")
+            # Save baseline results
+            project_root = Path(__file__).resolve().parents[2]
+            output_path = project_root / "results" / "baseline_demo.json"
 
-        st.dataframe(
-            rows,
-            hide_index=True,
-            use_container_width=True
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+
+            output_path.write_text(
+                json.dumps(output, indent=2),
+                encoding="utf-8",
+            )
+
+        # Success message
+        st.success(f"Baseline results saved to: {output_path}")
+
+        # Display detection results
+        st.subheader("Hallucination Detection Results")
+
+        if any(prediction.get("category") for prediction in predictions):
+            st.markdown(
+                create_legend_html(),
+                unsafe_allow_html=True,
+            )
+
+        html_content = create_interactive_text(
+            answer,
+            predictions,
         )
-    else:
-        st.success("No hallucinated spans detected.")
 
+        components.html(
+            html_content,
+            height=200,
+            scrolling=True,
+        )
 
-        # st.subheader("Raw Detection Output")
+        if predictions:
+            rows = [
+                {
+                    "start": prediction.get("start"),
+                    "end": prediction.get("end"),
+                    "text": prediction.get(
+                        "text",
+                        answer[
+                            prediction["start"]:prediction["end"]
+                        ],
+                    ),
+                    "category": prediction.get("category", "untyped"),
+                    "subcategory": prediction.get("subcategory", ""),
+                    "confidence": prediction.get("confidence"),
+                }
+                for prediction in predictions
+            ]
 
-        # st.json(predictions)
+            st.subheader("Detected Span Details")
+
+            st.dataframe(
+                rows,
+                hide_index=True,
+                use_container_width=True,
+            )
+
+        else:
+            st.success("No hallucinated spans detected.")
+
+    except Exception as e:
+        st.error(f"Detection or saving failed: {e}")
+        st.exception(e)
+
+#         # st.subheader("Raw Detection Output")
+
+#         # st.json(predictions)
 
 
 # --------------------------------------------------
