@@ -30,61 +30,61 @@ MODEL_OPTIONS = {
 }
 
 
-verification_result = {
-    "task": "QA",
-    "response_id": "15844",
-    "source_id": "15561",
-    "baseline_span": {
-        "start": 119,
-        "end": 245,
-        "text": " This means that if you buy a stock for $100 and it increases in value to $150, you can sell it for a profit of $50 per share.",
-        "confidence": 0.9996097683906555
-    },
-    "claim": "When a stock you own appreciates in value: This means that if you buy a stock for $100 and it increases in value to $150, you can sell it for a profit of $50 per share. However, since stock prices fluctuate constantly, you won't know exactly how much you'll make until you sell.",
-    "verification": {
-        "category": "Partially Supported",
-        "status": "provisional",
-        "supported_count": 1,
-        "contradicted_count": 0,
-        "neutral_count": 2,
-        "total_atomic_claims": 3,
-        "atomic_verifications": [
-            {
-                "atomic_claim": "When a stock you own appreciates in value, it means you can sell it for a profit.",
-                "nli_relation": "neutral",
-                "nli_scores": {
-                    "contradiction": 0.2123,
-                    "entailment": 0.0481,
-                    "neutral": 0.7396
-                }
-            },
-            {
-                "atomic_claim": "If you buy a stock for $100 and it increases in value to $150, you can sell it for a profit of $50 per share.",
-                "nli_relation": "neutral",
-                "nli_scores": {
-                    "contradiction": 0.2085,
-                    "entailment": 0.0313,
-                    "neutral": 0.7602
-                }
-            },
-            {
-                "atomic_claim": "However, stock prices fluctuate constantly, so you won't know exactly how much you'll make until you sell.",
-                "nli_relation": "entailment",
-                "nli_scores": {
-                    "contradiction": 0.0074,
-                    "entailment": 0.949,
-                    "neutral": 0.0436
-                }
-            }
-        ],
-        "scope": "rank_1_only",
-        "evidence_rank": 1,
-        "evidence": "The first way is when a stock you own appreciates in value-that is, when people who want to buy the stock decide that a share is worth more than you paid for it.ince stock prices fluctuate constantly when the market is open, you never really know how much you're going to make until you sell. The second way is when the company that owns the stock issues dividends-a payout that companies sometimes make to shareholders.",
-        "ranking_score": 0.6905,
-        "decomposition_model": "qwen2.5:0.5b-instruct",
-        "nli_model": "cross-encoder/nli-MiniLM2-L6-H768"
-    }
-}
+# verification_result = {
+#     "task": "QA",
+#     "response_id": "15844",
+#     "source_id": "15561",
+#     "baseline_span": {
+#         "start": 119,
+#         "end": 245,
+#         "text": " This means that if you buy a stock for $100 and it increases in value to $150, you can sell it for a profit of $50 per share.",
+#         "confidence": 0.9996097683906555
+#     },
+#     "claim": "When a stock you own appreciates in value: This means that if you buy a stock for $100 and it increases in value to $150, you can sell it for a profit of $50 per share. However, since stock prices fluctuate constantly, you won't know exactly how much you'll make until you sell.",
+#     "verification": {
+#         "category": "Partially Supported",
+#         "status": "provisional",
+#         "supported_count": 1,
+#         "contradicted_count": 0,
+#         "neutral_count": 2,
+#         "total_atomic_claims": 3,
+#         "atomic_verifications": [
+#             {
+#                 "atomic_claim": "When a stock you own appreciates in value, it means you can sell it for a profit.",
+#                 "nli_relation": "neutral",
+#                 "nli_scores": {
+#                     "contradiction": 0.2123,
+#                     "entailment": 0.0481,
+#                     "neutral": 0.7396
+#                 }
+#             },
+#             {
+#                 "atomic_claim": "If you buy a stock for $100 and it increases in value to $150, you can sell it for a profit of $50 per share.",
+#                 "nli_relation": "neutral",
+#                 "nli_scores": {
+#                     "contradiction": 0.2085,
+#                     "entailment": 0.0313,
+#                     "neutral": 0.7602
+#                 }
+#             },
+#             {
+#                 "atomic_claim": "However, stock prices fluctuate constantly, so you won't know exactly how much you'll make until you sell.",
+#                 "nli_relation": "entailment",
+#                 "nli_scores": {
+#                     "contradiction": 0.0074,
+#                     "entailment": 0.949,
+#                     "neutral": 0.0436
+#                 }
+#             }
+#         ],
+#         "scope": "rank_1_only",
+#         "evidence_rank": 1,
+#         "evidence": "The first way is when a stock you own appreciates in value-that is, when people who want to buy the stock decide that a share is worth more than you paid for it.ince stock prices fluctuate constantly when the market is open, you never really know how much you're going to make until you sell. The second way is when the company that owns the stock issues dividends-a payout that companies sometimes make to shareholders.",
+#         "ranking_score": 0.6905,
+#         "decomposition_model": "qwen2.5:0.5b-instruct",
+#         "nli_model": "cross-encoder/nli-MiniLM2-L6-H768"
+#     }
+# }
 
 
 
@@ -366,6 +366,9 @@ if st.button("Detect Hallucinations"):
                 json.dumps(output, indent=2),
                 encoding="utf-8",
             )
+            # verification_result = json.loads(
+            #     output_path.read_text(encoding="utf-8")
+            # )
 
         # Success message
         st.success(f"Baseline results saved to: {output_path}")
@@ -419,87 +422,223 @@ if st.button("Detect Hallucinations"):
         else:
             st.success("No hallucinated spans detected.")
 
-        verification = verification_result["verification"]
-        baseline = verification_result["baseline_span"]
+        # verification = verification_result["verification"]
+        # baseline = verification_result["baseline_span"]
+
+        # example = verification_result["examples"][0]
+
+        # report_spans = example.get("predicted_spans", [])
+        # report_context = verification_result.get("context", [""])[0]
+        # report_question = verification_result.get("question", "")
+        # report_answer = example.get("answer", "")
+
+        # st.divider()
+        # st.header("Detailed Verification Report")
+
+        # # Summary metrics
+        # st.subheader("Overall Verification")
+
+        # col1, col2, col3, col4 = st.columns(4)
+
+        # col1.metric("Supported", verification["supported_count"])
+        # col2.metric("Contradicted", verification["contradicted_count"])
+        # col3.metric("Neutral", verification["neutral_count"])
+        # col4.metric("Total Claims", verification["total_atomic_claims"])
+
+        # st.write(
+        #     "**Verification Category:**",
+        #     verification["category"]
+        # )
+
+        # st.write(
+        #     "**Verification Status:**",
+        #     verification["status"].title()
+        # )
+
+        # # Claim-level verification
+        # st.subheader("Atomic Claim Verification")
+
+        # claim_rows = []
+
+        # for item in verification["atomic_verifications"]:
+        #     scores = item["nli_scores"]
+
+        #     claim_rows.append({
+        #         "Atomic Claim": item["atomic_claim"],
+        #         "NLI Relation": item["nli_relation"].title(),
+        #         "Contradiction (%)": round(scores["contradiction"] * 100, 2),
+        #         "Entailment (%)": round(scores["entailment"] * 100, 2),
+        #         "Neutral (%)": round(scores["neutral"] * 100, 2),
+        #     })
+
+        # st.dataframe(
+        #     claim_rows,
+        #     hide_index=True,
+        #     use_container_width=True
+        # )
+            
+        # # Baseline span
+        # st.subheader("Baseline Span")
+
+        # st.write("**Baseline Text:**")
+        # st.info(baseline["text"])
+
+        # st.write(
+        #     f"**Detection Confidence:** "
+        #     f"{baseline['confidence'] * 100:.2f}%"
+        # )
+
+        # # Original claim
+        # st.subheader("Original Claim")
+
+        # st.write(verification_result["claim"])
+
+        # # Evidence
+        # st.subheader("Retrieved Evidence / Proof Text")
+
+        # st.info(verification["evidence"])
+
+        # # Additional information
+        # with st.expander("Additional Verification Details"):
+
+        #     st.write("**Task:**", verification_result["task"])
+        #     st.write("**Response ID:**", verification_result["response_id"])
+        #     st.write("**Source ID:**", verification_result["source_id"])
+        #     st.write("**Evidence Rank:**", verification["evidence_rank"])
+        #     st.write("**Ranking Score:**", verification["ranking_score"])
+        #     st.write("**Scope:**", verification["scope"])
+        #     st.write("**Decomposition Model:**", verification["decomposition_model"])
+        #     st.write("**NLI Model:**", verification["nli_model"])
+            
+
+
+        # --------------------------------------------------
+        # DYNAMIC HALLUCINATION DETECTION REPORT
+        # --------------------------------------------------
 
         st.divider()
-        st.header("Detailed Verification Report")
+        st.header("Detailed Hallucination Detection Report")
 
-        # Summary metrics
-        st.subheader("Overall Verification")
+        # 1. Input Information
+        st.subheader("Input Information")
 
-        col1, col2, col3, col4 = st.columns(4)
+        st.write("**Question:**")
+        st.text(question)
 
-        col1.metric("Supported", verification["supported_count"])
-        col2.metric("Contradicted", verification["contradicted_count"])
-        col3.metric("Neutral", verification["neutral_count"])
-        col4.metric("Total Claims", verification["total_atomic_claims"])
+        st.write("**Reference Context:**")
+        st.text(context)
 
-        st.write(
-            "**Verification Category:**",
-            verification["category"]
-        )
+        st.write("**Original Answer:**")
+        st.text(answer)
 
-        st.write(
-            "**Verification Status:**",
-            verification["status"].title()
-        )
+        # 2. Process detected spans
+        valid_spans = [
+            span for span in predictions
+            if isinstance(span, dict)
+        ]
 
-        # Claim-level verification
-        st.subheader("Atomic Claim Verification")
+        category_counts = {}
 
-        claim_rows = []
+        report_rows = []
 
-        for item in verification["atomic_verifications"]:
-            scores = item["nli_scores"]
+        for span in valid_spans:
 
-            claim_rows.append({
-                "Atomic Claim": item["atomic_claim"],
-                "NLI Relation": item["nli_relation"].title(),
-                "Contradiction (%)": round(scores["contradiction"] * 100, 2),
-                "Entailment (%)": round(scores["entailment"] * 100, 2),
-                "Neutral (%)": round(scores["neutral"] * 100, 2),
+            category = span.get("category") or "untyped"
+            subcategory = span.get("subcategory") or "N/A"
+            confidence = span.get("confidence")
+
+            category_counts[category] = (
+                category_counts.get(category, 0) + 1
+            )
+
+            if isinstance(confidence, (int, float)):
+                confidence_display = round(confidence * 100, 2)
+            else:
+                confidence_display = None
+
+            start = span.get("start")
+            end = span.get("end")
+
+            detected_text = span.get("text")
+
+            if not isinstance(detected_text, str):
+                if (
+                    isinstance(start, int)
+                    and isinstance(end, int)
+                    and 0 <= start <= end <= len(answer)
+                ):
+                    detected_text = answer[start:end]
+                else:
+                    detected_text = "N/A"
+
+            report_rows.append({
+                "Detected Text": detected_text,
+                "Category": category,
+                "Subcategory": subcategory,
+                "Confidence (%)": confidence_display,
+                "Start Position": start,
+                "End Position": end,
             })
 
-        st.dataframe(
-            claim_rows,
-            hide_index=True,
-            use_container_width=True
-        )
-            
-        # Baseline span
-        st.subheader("Baseline Span")
+        # 3. Overall Summary
+        st.subheader("Overall Detection Summary")
 
-        st.write("**Baseline Text:**")
-        st.info(baseline["text"])
+        total_spans = len(valid_spans)
+        total_categories = len(category_counts)
 
-        st.write(
-            f"**Detection Confidence:** "
-            f"{baseline['confidence'] * 100:.2f}%"
-        )
+        col1, col2 = st.columns(2)
 
-        # Original claim
-        st.subheader("Original Claim")
+        col1.metric("Total Detected Spans", total_spans)
+        col2.metric("Detection Categories", total_categories)
 
-        st.write(verification_result["claim"])
+        # 4. Category Breakdown
+        if category_counts:
 
-        # Evidence
-        st.subheader("Retrieved Evidence / Proof Text")
+            st.write("**Hallucination Category Breakdown**")
 
-        st.info(verification["evidence"])
+            category_rows = [
+                {
+                    "Category": category,
+                    "Count": count,
+                }
+                for category, count in category_counts.items()
+            ]
 
-        # Additional information
-        with st.expander("Additional Verification Details"):
+            st.dataframe(
+                category_rows,
+                hide_index=True,
+                use_container_width=True,
+            )
 
-            st.write("**Task:**", verification_result["task"])
-            st.write("**Response ID:**", verification_result["response_id"])
-            st.write("**Source ID:**", verification_result["source_id"])
-            st.write("**Evidence Rank:**", verification["evidence_rank"])
-            st.write("**Ranking Score:**", verification["ranking_score"])
-            st.write("**Scope:**", verification["scope"])
-            st.write("**Decomposition Model:**", verification["decomposition_model"])
-            st.write("**NLI Model:**", verification["nli_model"])
-            
+        else:
+            st.success("No hallucinated spans detected.")
+
+        # 5. Detailed Span Report
+        st.subheader("Detected Claim Details")
+
+        if report_rows:
+
+            st.dataframe(
+                report_rows,
+                hide_index=True,
+                use_container_width=True,
+            )
+
+        else:
+            st.info("No detected hallucination spans to display.")
+
+        # 6. Additional Details
+        with st.expander("Additional Detection Details"):
+
+            st.write("**Selected Model:**", MODEL_OPTIONS[model_label]["model_path"])
+
+            st.write("**Total Characters in Answer:**", len(answer))
+
+            st.write("**Total Words in Answer:**", len(answer.split()))
+
+            st.write("**Total Detected Spans:**", total_spans)
+
+            st.write("**Total Categories:**", total_categories)
 
 
     except Exception as e:
