@@ -419,6 +419,89 @@ if st.button("Detect Hallucinations"):
         else:
             st.success("No hallucinated spans detected.")
 
+        verification = verification_result["verification"]
+        baseline = verification_result["baseline_span"]
+
+        st.divider()
+        st.header("Detailed Verification Report")
+
+        # Summary metrics
+        st.subheader("Overall Verification")
+
+        col1, col2, col3, col4 = st.columns(4)
+
+        col1.metric("Supported", verification["supported_count"])
+        col2.metric("Contradicted", verification["contradicted_count"])
+        col3.metric("Neutral", verification["neutral_count"])
+        col4.metric("Total Claims", verification["total_atomic_claims"])
+
+        st.write(
+            "**Verification Category:**",
+            verification["category"]
+        )
+
+        st.write(
+            "**Verification Status:**",
+            verification["status"].title()
+        )
+
+        # Claim-level verification
+        st.subheader("Atomic Claim Verification")
+
+        claim_rows = []
+
+        for item in verification["atomic_verifications"]:
+            scores = item["nli_scores"]
+
+            claim_rows.append({
+                "Atomic Claim": item["atomic_claim"],
+                "NLI Relation": item["nli_relation"].title(),
+                "Contradiction (%)": round(scores["contradiction"] * 100, 2),
+                "Entailment (%)": round(scores["entailment"] * 100, 2),
+                "Neutral (%)": round(scores["neutral"] * 100, 2),
+            })
+
+        st.dataframe(
+            claim_rows,
+            hide_index=True,
+            use_container_width=True
+        )
+            
+        # Baseline span
+        st.subheader("Baseline Span")
+
+        st.write("**Baseline Text:**")
+        st.info(baseline["text"])
+
+        st.write(
+            f"**Detection Confidence:** "
+            f"{baseline['confidence'] * 100:.2f}%"
+        )
+
+        # Original claim
+        st.subheader("Original Claim")
+
+        st.write(verification_result["claim"])
+
+        # Evidence
+        st.subheader("Retrieved Evidence / Proof Text")
+
+        st.info(verification["evidence"])
+
+        # Additional information
+        with st.expander("Additional Verification Details"):
+
+            st.write("**Task:**", verification_result["task"])
+            st.write("**Response ID:**", verification_result["response_id"])
+            st.write("**Source ID:**", verification_result["source_id"])
+            st.write("**Evidence Rank:**", verification["evidence_rank"])
+            st.write("**Ranking Score:**", verification["ranking_score"])
+            st.write("**Scope:**", verification["scope"])
+            st.write("**Decomposition Model:**", verification["decomposition_model"])
+            st.write("**NLI Model:**", verification["nli_model"])
+            
+
+
     except Exception as e:
         st.error(f"Detection or saving failed: {e}")
         st.exception(e)
@@ -432,86 +515,6 @@ if st.button("Detect Hallucinations"):
 # STATIC CLAIM VERIFICATION REPORT
 # --------------------------------------------------
 
-verification = verification_result["verification"]
-baseline = verification_result["baseline_span"]
 
-st.divider()
-st.header("Detailed Verification Report")
-
-# Summary metrics
-st.subheader("Overall Verification")
-
-col1, col2, col3, col4 = st.columns(4)
-
-col1.metric("Supported", verification["supported_count"])
-col2.metric("Contradicted", verification["contradicted_count"])
-col3.metric("Neutral", verification["neutral_count"])
-col4.metric("Total Claims", verification["total_atomic_claims"])
-
-st.write(
-    "**Verification Category:**",
-    verification["category"]
-)
-
-st.write(
-    "**Verification Status:**",
-    verification["status"].title()
-)
-
-# Claim-level verification
-st.subheader("Atomic Claim Verification")
-
-claim_rows = []
-
-for item in verification["atomic_verifications"]:
-    scores = item["nli_scores"]
-
-    claim_rows.append({
-        "Atomic Claim": item["atomic_claim"],
-        "NLI Relation": item["nli_relation"].title(),
-        "Contradiction (%)": round(scores["contradiction"] * 100, 2),
-        "Entailment (%)": round(scores["entailment"] * 100, 2),
-        "Neutral (%)": round(scores["neutral"] * 100, 2),
-    })
-
-st.dataframe(
-    claim_rows,
-    hide_index=True,
-    use_container_width=True
-)
-    
-# Baseline span
-st.subheader("Baseline Span")
-
-st.write("**Baseline Text:**")
-st.info(baseline["text"])
-
-st.write(
-    f"**Detection Confidence:** "
-    f"{baseline['confidence'] * 100:.2f}%"
-)
-
-# Original claim
-st.subheader("Original Claim")
-
-st.write(verification_result["claim"])
-
-# Evidence
-st.subheader("Retrieved Evidence / Proof Text")
-
-st.info(verification["evidence"])
-
-# Additional information
-with st.expander("Additional Verification Details"):
-
-    st.write("**Task:**", verification_result["task"])
-    st.write("**Response ID:**", verification_result["response_id"])
-    st.write("**Source ID:**", verification_result["source_id"])
-    st.write("**Evidence Rank:**", verification["evidence_rank"])
-    st.write("**Ranking Score:**", verification["ranking_score"])
-    st.write("**Scope:**", verification["scope"])
-    st.write("**Decomposition Model:**", verification["decomposition_model"])
-    st.write("**NLI Model:**", verification["nli_model"])
-    
     # else:
     #     st.success("No hallucinated spans detected.")
