@@ -1,29 +1,21 @@
 {
   "model_id": "KRLabsOrg/lettucedect-v2-mmbert-base",
   "context": [
-    "Jupiter is the largest planet in our solar system. It has a Great Red Spot, which is a giant storm. Jupiter takes approximately 12 Earth years to complete one orbit around the Sun."
+    "Atul works in Big Way"
   ],
-  "question": "Which is the largest planet in our solar system, and how long does it take to orbit the Sun?",
+  "question": "where does Atul work?",
   "examples": [
     {
       "name": "Current answer",
-      "answer": "Saturn is the largest planet in our solar system. It takes approximately 29 Earth years to complete one orbit around the Sun.",
+      "answer": "Atul works in Cactus",
       "predicted_spans": [
         {
-          "start": 0,
-          "end": 6,
-          "confidence": 0.665028989315033,
-          "text": "Saturn",
-          "category": "contradiction",
+          "start": 13,
+          "end": 20,
+          "confidence": 0.9369955062866211,
+          "text": " Cactus",
+          "category": "fabricated_reference",
           "subcategory": "entity"
-        },
-        {
-          "start": 72,
-          "end": 87,
-          "confidence": 0.9522375464439392,
-          "text": " 29 Earth years",
-          "category": "unsupported_addition",
-          "subcategory": "claim"
         }
       ]
     }
