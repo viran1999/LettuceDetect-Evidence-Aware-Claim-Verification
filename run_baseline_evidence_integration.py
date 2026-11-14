@@ -215,7 +215,9 @@ def main() -> None:
         source_id, response_id = str(response.get("source_id", "")), str(response.get("id", ""))
 
     print(f"Loading real LettuceDetect baseline: {args.model}", flush=True)
+    
     from lettucedetect.models.inference import HallucinationDetector
+    
     detector = HallucinationDetector(method="transformer", model_path=args.model)
     ranker = create_ranker(args.ranker)
     result = analyze_record(detector=detector, answer=answer, source_info=source_info,
@@ -224,6 +226,19 @@ def main() -> None:
     result["baseline_model"] = args.model
     result["evidence_ranker"] = args.ranker
     result["ranking_score_note"] = "Relevance ranking only, NOT probability of hallucination."
+    
+    # --------------------------------------------------
+    # Evidence-Aware Atomic Claim Verification
+    # Runs AFTER LettuceDetect and Evidence Ranking V2.
+    # --------------------------------------------------
+    if args.ranker == "v2":
+        from enhancements.v2_claim_verification import add_claim_verification
+
+        print("\nStarting Evidence-Aware Claim Verification...")
+
+        result = add_claim_verification(result)
+    
+    # Save the combined results
     output = Path(args.output)
     output.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"\nBaseline hallucinated spans: {len(result['baseline_spans'])}")
@@ -235,7 +250,7 @@ def main() -> None:
     if not result["baseline_spans"]:
         print("No spans detected. This predicted-span-first approach cannot rescue missed claims.")
     print(f"\nSaved: {output.resolve()}", flush=True)
-    print("Not yet a complete enhanced detector: the evidence verifier and fusion are future steps.")
+    print("Evidence-aware claim verification completed. Detector fusion remains future work.")
 
 
 if __name__ == "__main__":
