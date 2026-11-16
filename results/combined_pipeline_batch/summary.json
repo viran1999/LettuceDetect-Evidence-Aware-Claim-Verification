@@ -1,0 +1,17 @@
+{
+  "responses_selected": 300,
+  "responses_completed": 293,
+  "responses_failed_or_skipped": 7,
+  "responses_with_predicted_spans": 113,
+  "responses_without_predicted_spans": 180,
+  "predicted_spans_total": 253,
+  "claims_total": 253,
+  "verification_categories": {
+    "Supported": 9,
+    "Partially Supported": 36,
+    "Unverifiable": 159,
+    "Contradicted": 36,
+    "Unknown (inspect JSON)": 13
+  },
+  "warning": "These are predicted category counts, NOT verification accuracy; validate against RAGTruth labels separately."
+}
