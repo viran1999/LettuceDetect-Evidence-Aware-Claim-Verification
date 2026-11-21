@@ -5,11 +5,17 @@ from enhancements.structured_evidence import normalize_structured_evidence
 
 from enhancements.atomic_claim_verifier import verify_atomic_claims
 
+from enhancements.span_verification_context import (
+    prepare_span_verification_context
+)
+
+from enhancements.evidence_relevance_guard import assess_evidence_relevance
+
 
 NLI_MODEL = "cross-encoder/nli-MiniLM2-L6-H768"
 
 
-def add_claim_verification(result):
+def add_claim_verification(result, source_info=None):
     """
     Add atomic claim verification to Evidence Ranking V2 output.
 
@@ -33,7 +39,7 @@ def add_claim_verification(result):
         NLI_MODEL,
         device="cpu"
     )
-    
+
     # Cache verification results for identical claim-evidence pairs.
     verification_cache = {}
 
@@ -54,7 +60,7 @@ def add_claim_verification(result):
         if rank_one is None or not rank_one.get("evidence"):
             review["verification_status"] = "NO_RANK_1_EVIDENCE"
             continue
-        
+
         # Preserve the original ranked evidence.
         original_evidence = rank_one["evidence"]
 
@@ -70,7 +76,7 @@ def add_claim_verification(result):
 
         print(f"\nVerifying claim {index}/{len(reviews)}")
 
-        
+
         cache_key = (claim, evidence_for_nli)
 
         try:
@@ -116,6 +122,60 @@ def add_claim_verification(result):
         # Preserve the existing ranking output.
         # Add our categorization alongside it.
         review["verification"] = verification
+
+        # Prepare span-aware context using atomic claims already
+        # produced by Qwen. No additional model calls required.
+        if source_info is not None:
+            span = review.get("baseline_span", {})
+
+            span_text = (
+                span.get("text")
+                if isinstance(span, dict)
+                else None
+            )
+
+            atomic_claims = [
+                item["atomic_claim"]
+                for item in verification.get("atomic_verifications", [])
+                if (
+                    isinstance(item, dict)
+                    and isinstance(item.get("atomic_claim"), str)
+                    and item["atomic_claim"].strip()
+                )
+            ]
+
+            if span_text and atomic_claims:
+                review["span_verification_context"] = (
+                    prepare_span_verification_context(
+                        suspicious_span=span_text,
+                        atomic_claims=atomic_claims,
+                        source_info=source_info,
+                        task=result.get("task", "")
+                    )
+                )
+
+        # Check whether Rank 1 evidence is relevant to the
+        # suspicious span's structured attribute.
+        span_context = review.get("span_verification_context")
+
+        if span_context is not None:
+            relevance = assess_evidence_relevance(
+                span_context,
+                original_evidence
+            )
+
+            verification["evidence_relevance"] = relevance["status"]
+
+            if relevance["status"] == "irrelevant":
+                # Preserve the original NLI prediction for debugging.
+                verification["raw_nli_category"] = verification["category"]
+
+                # Do not make a definitive decision using unrelated evidence.
+                verification["category"] = None
+                verification["status"] = "needs_review"
+                verification["decision_reason"] = (
+                    "rank_1_evidence_irrelevant_to_suspicious_span"
+                )
 
         review["verification_status"] = (
             verification["category"]
