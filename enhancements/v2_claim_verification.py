@@ -2,14 +2,12 @@
 from sentence_transformers import CrossEncoder
 from copy import deepcopy
 from enhancements.structured_evidence import normalize_structured_evidence
-
 from enhancements.atomic_claim_verifier import verify_atomic_claims
-
+from enhancements.span_decision import decide_span_category
+from enhancements.evidence_relevance_guard import assess_evidence_relevance
 from enhancements.span_verification_context import (
     prepare_span_verification_context
 )
-
-from enhancements.evidence_relevance_guard import assess_evidence_relevance
 
 
 NLI_MODEL = "cross-encoder/nli-MiniLM2-L6-H768"
@@ -175,6 +173,29 @@ def add_claim_verification(result, source_info=None):
                 verification["status"] = "needs_review"
                 verification["decision_reason"] = (
                     "rank_1_evidence_irrelevant_to_suspicious_span"
+                )
+
+        # Reuse existing atomic NLI predictions without additional model calls.
+        if isinstance(span_context, dict):
+
+            # Preserve the whole-sentence category for comparison.
+            verification["whole_claim_category"] = verification.get(
+                "raw_nli_category",
+                verification.get("category")
+            )
+
+            span_decision = decide_span_category(
+                verification,
+                span_context
+            )
+
+            verification["category"] = span_decision["category"]
+            verification["status"] = span_decision["status"]
+            verification["decision_reason"] = span_decision["decision_reason"]
+
+            if "selected_nli_relation" in span_decision:
+                verification["selected_nli_relation"] = (
+                    span_decision["selected_nli_relation"]
                 )
 
         review["verification_status"] = (
