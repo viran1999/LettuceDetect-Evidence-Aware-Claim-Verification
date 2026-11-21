@@ -97,7 +97,7 @@ Output:
             "required": ["atomic_claims"]
         },
         "options": {"temperature": 0},
-        "keep_alive": 0
+        "keep_alive": "10m"
     }
 
     request = urllib.request.Request(

@@ -52,11 +52,33 @@ def add_claim_verification(result):
 
         print(f"\nVerifying claim {index}/{len(reviews)}")
 
-        verification = verify_atomic_claims(
-            claim=claim,
-            evidence=rank_one["evidence"],
-            nli_model=nli_model
-        )
+        
+        try:
+            verification = verify_atomic_claims(
+                claim=claim,
+                evidence=rank_one["evidence"],
+                nli_model=nli_model
+            )
+
+        except Exception as exc:
+            print(
+                f"Verification failed for claim {index}: "
+                f"{type(exc).__name__}: {exc}"
+            )
+
+            review["verification_status"] = "VERIFICATION_ERROR"
+
+            review["verification"] = {
+                "category": None,
+                "status": "error",
+                "error_type": type(exc).__name__,
+                "error_message": str(exc)[:300],
+                "evidence_rank": 1,
+                "scope": "rank_1_only"
+            }
+
+            # Continue with the next claim.
+            continue
 
         verification["evidence_rank"] = 1
         verification["evidence"] = rank_one["evidence"]
