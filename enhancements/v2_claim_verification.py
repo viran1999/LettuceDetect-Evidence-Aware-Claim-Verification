@@ -1,6 +1,7 @@
 
 from sentence_transformers import CrossEncoder
 from copy import deepcopy
+from enhancements.structured_evidence import normalize_structured_evidence
 
 from enhancements.atomic_claim_verifier import verify_atomic_claims
 
@@ -53,11 +54,24 @@ def add_claim_verification(result):
         if rank_one is None or not rank_one.get("evidence"):
             review["verification_status"] = "NO_RANK_1_EVIDENCE"
             continue
+        
+        # Preserve the original ranked evidence.
+        original_evidence = rank_one["evidence"]
+
+        # Normalize structured evidence only for Data2Txt.
+        task = str(result.get("task", "")).casefold()
+
+        if task == "data2txt":
+            evidence_for_nli = normalize_structured_evidence(
+                original_evidence
+            )
+        else:
+            evidence_for_nli = original_evidence
 
         print(f"\nVerifying claim {index}/{len(reviews)}")
 
         
-        cache_key = (claim, rank_one["evidence"])
+        cache_key = (claim, evidence_for_nli)
 
         try:
             if cache_key in verification_cache:
@@ -67,7 +81,7 @@ def add_claim_verification(result):
             else:
                 verification = verify_atomic_claims(
                     claim=claim,
-                    evidence=rank_one["evidence"],
+                    evidence=evidence_for_nli,
                     nli_model=nli_model
                 )
 
@@ -95,6 +109,7 @@ def add_claim_verification(result):
 
         verification["evidence_rank"] = 1
         verification["evidence"] = rank_one["evidence"]
+        verification["evidence_used_for_nli"] = evidence_for_nli
         verification["ranking_score"] = rank_one.get("score")
         verification["scope"] = "rank_1_only"
 
