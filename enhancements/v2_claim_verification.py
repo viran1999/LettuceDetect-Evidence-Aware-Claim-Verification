@@ -1,5 +1,6 @@
 
 from sentence_transformers import CrossEncoder
+from copy import deepcopy
 
 from enhancements.atomic_claim_verifier import verify_atomic_claims
 
@@ -31,6 +32,9 @@ def add_claim_verification(result):
         NLI_MODEL,
         device="cpu"
     )
+    
+    # Cache verification results for identical claim-evidence pairs.
+    verification_cache = {}
 
     for index, review in enumerate(reviews, start=1):
 
@@ -53,12 +57,21 @@ def add_claim_verification(result):
         print(f"\nVerifying claim {index}/{len(reviews)}")
 
         
+        cache_key = (claim, rank_one["evidence"])
+
         try:
-            verification = verify_atomic_claims(
-                claim=claim,
-                evidence=rank_one["evidence"],
-                nli_model=nli_model
-            )
+            if cache_key in verification_cache:
+                verification = deepcopy(verification_cache[cache_key])
+                print(f"Reusing cached verification for claim {index}")
+
+            else:
+                verification = verify_atomic_claims(
+                    claim=claim,
+                    evidence=rank_one["evidence"],
+                    nli_model=nli_model
+                )
+
+                verification_cache[cache_key] = deepcopy(verification)
 
         except Exception as exc:
             print(
