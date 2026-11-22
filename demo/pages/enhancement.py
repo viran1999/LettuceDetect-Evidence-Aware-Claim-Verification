@@ -58,7 +58,15 @@ def run_full_pipeline(detector, context, question, answer, task):
         ranker=load_evidence_ranker(),
         top_k=3,
     )
-    return add_claim_verification(result)
+
+    # Nilanga's newer verification (bugfix/pipeline-reliability) also takes
+    # the source text. Older versions only take the result, so support both.
+    try:
+        return add_claim_verification(result, source_info=context)
+    except TypeError as error:
+        if "source_info" not in str(error):
+            raise
+        return add_claim_verification(result)
 
 
 def show_claim_card(number, item):
@@ -93,6 +101,12 @@ def show_claim_card(number, item):
 
         category = verification.get("category") or "Needs review"
         st.badge(category, color=VERDICT_COLORS.get(category, "blue"))
+
+        # Explain why there is no final category (newer verification code)
+        if verification.get("decision_reason"):
+            st.caption(f"Reason: {verification['decision_reason']}")
+        if verification.get("status") == "error":
+            st.warning(f"Verification error: {verification.get('error_message', 'unknown error')}")
         st.write(
             f"{verification.get('supported_count', 0)} of "
             f"{verification.get('total_atomic_claims', 0)} small claims are supported by the evidence."
