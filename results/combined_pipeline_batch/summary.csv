@@ -1,0 +1,301 @@
+response_id,task,status,predicted_spans,claims,categories,seconds,output_path,log_path
+17613,QA,ok,0,0,{},16.01,results/combined_pipeline_batch/json/17613.json,results/combined_pipeline_batch/logs/17613.log
+11322,Data2Txt,ok,0,0,{},14.2,results/combined_pipeline_batch/json/11322.json,results/combined_pipeline_batch/logs/11322.log
+137,Summary,ok,0,0,{},11.93,results/combined_pipeline_batch/json/137.json,results/combined_pipeline_batch/logs/137.log
+13873,QA,ok,0,0,{},8.83,results/combined_pipeline_batch/json/13873.json,results/combined_pipeline_batch/logs/13873.log
+11715,Data2Txt,ok,0,0,{},9.9,results/combined_pipeline_batch/json/11715.json,results/combined_pipeline_batch/logs/11715.log
+3335,Summary,ok,2,2,"{""Supported"": 2}",33.96,results/combined_pipeline_batch/json/3335.json,results/combined_pipeline_batch/logs/3335.log
+15844,QA,ok,1,1,"{""Partially Supported"": 1}",18.65,results/combined_pipeline_batch/json/15844.json,results/combined_pipeline_batch/logs/15844.log
+7514,Data2Txt,ok,3,3,"{""Unverifiable"": 3}",56.74,results/combined_pipeline_batch/json/7514.json,results/combined_pipeline_batch/logs/7514.log
+641,Summary,ok,0,0,{},17.02,results/combined_pipeline_batch/json/641.json,results/combined_pipeline_batch/logs/641.log
+15310,QA,ok,0,0,{},8.62,results/combined_pipeline_batch/json/15310.json,results/combined_pipeline_batch/logs/15310.log
+7664,Data2Txt,ok,5,5,"{""Unverifiable"": 4, ""Contradicted"": 1}",35.0,results/combined_pipeline_batch/json/7664.json,results/combined_pipeline_batch/logs/7664.log
+1651,Summary,ok,0,0,{},10.38,results/combined_pipeline_batch/json/1651.json,results/combined_pipeline_batch/logs/1651.log
+16857,QA,ok,0,0,{},9.16,results/combined_pipeline_batch/json/16857.json,results/combined_pipeline_batch/logs/16857.log
+11614,Data2Txt,ok,2,2,"{""Contradicted"": 1, ""Unverifiable"": 1}",20.96,results/combined_pipeline_batch/json/11614.json,results/combined_pipeline_batch/logs/11614.log
+2033,Summary,ok,0,0,{},8.5,results/combined_pipeline_batch/json/2033.json,results/combined_pipeline_batch/logs/2033.log
+16832,QA,ok,0,0,{},8.74,results/combined_pipeline_batch/json/16832.json,results/combined_pipeline_batch/logs/16832.log
+11594,Data2Txt,error_exit_1,0,0,{},316.24,results/combined_pipeline_batch/json/11594.json,results/combined_pipeline_batch/logs/11594.log
+5632,Summary,ok,0,0,{},9.8,results/combined_pipeline_batch/json/5632.json,results/combined_pipeline_batch/logs/5632.log
+17296,QA,ok,0,0,{},10.53,results/combined_pipeline_batch/json/17296.json,results/combined_pipeline_batch/logs/17296.log
+5867,Data2Txt,ok,4,4,"{""Partially Supported"": 2, ""Contradicted"": 2}",45.24,results/combined_pipeline_batch/json/5867.json,results/combined_pipeline_batch/logs/5867.log
+3159,Summary,error_exit_1,0,0,{},311.76,results/combined_pipeline_batch/json/3159.json,results/combined_pipeline_batch/logs/3159.log
+12686,QA,ok,2,2,"{""Unverifiable"": 2}",21.41,results/combined_pipeline_batch/json/12686.json,results/combined_pipeline_batch/logs/12686.log
+10250,Data2Txt,ok,4,4,"{""Unverifiable"": 4}",35.01,results/combined_pipeline_batch/json/10250.json,results/combined_pipeline_batch/logs/10250.log
+2156,Summary,ok,0,0,{},8.14,results/combined_pipeline_batch/json/2156.json,results/combined_pipeline_batch/logs/2156.log
+17464,QA,ok,0,0,{},8.24,results/combined_pipeline_batch/json/17464.json,results/combined_pipeline_batch/logs/17464.log
+11031,Data2Txt,ok,4,4,"{""Contradicted"": 1, ""Unverifiable"": 3}",37.91,results/combined_pipeline_batch/json/11031.json,results/combined_pipeline_batch/logs/11031.log
+1883,Summary,ok,0,0,{},9.23,results/combined_pipeline_batch/json/1883.json,results/combined_pipeline_batch/logs/1883.log
+12612,QA,ok,0,0,{},9.01,results/combined_pipeline_batch/json/12612.json,results/combined_pipeline_batch/logs/12612.log
+8337,Data2Txt,ok,2,2,"{""Unverifiable"": 1, ""Unknown (inspect JSON)"": 1}",33.69,results/combined_pipeline_batch/json/8337.json,results/combined_pipeline_batch/logs/8337.log
+3023,Summary,ok,0,0,{},11.38,results/combined_pipeline_batch/json/3023.json,results/combined_pipeline_batch/logs/3023.log
+17039,QA,ok,5,5,"{""Unverifiable"": 3, ""Partially Supported"": 2}",38.7,results/combined_pipeline_batch/json/17039.json,results/combined_pipeline_batch/logs/17039.log
+7823,Data2Txt,ok,3,3,"{""Unverifiable"": 3}",26.48,results/combined_pipeline_batch/json/7823.json,results/combined_pipeline_batch/logs/7823.log
+3904,Summary,ok,4,4,"{""Unverifiable"": 3, ""Contradicted"": 1}",31.63,results/combined_pipeline_batch/json/3904.json,results/combined_pipeline_batch/logs/3904.log
+14980,QA,ok,1,1,"{""Unverifiable"": 1}",16.47,results/combined_pipeline_batch/json/14980.json,results/combined_pipeline_batch/logs/14980.log
+10092,Data2Txt,ok,0,0,{},11.68,results/combined_pipeline_batch/json/10092.json,results/combined_pipeline_batch/logs/10092.log
+4675,Summary,ok,0,0,{},9.37,results/combined_pipeline_batch/json/4675.json,results/combined_pipeline_batch/logs/4675.log
+16844,QA,ok,0,0,{},9.0,results/combined_pipeline_batch/json/16844.json,results/combined_pipeline_batch/logs/16844.log
+5930,Data2Txt,ok,2,2,"{""Unverifiable"": 1, ""Contradicted"": 1}",22.49,results/combined_pipeline_batch/json/5930.json,results/combined_pipeline_batch/logs/5930.log
+3746,Summary,ok,0,0,{},8.5,results/combined_pipeline_batch/json/3746.json,results/combined_pipeline_batch/logs/3746.log
+13543,QA,ok,0,0,{},9.11,results/combined_pipeline_batch/json/13543.json,results/combined_pipeline_batch/logs/13543.log
+11000,Data2Txt,ok,3,3,"{""Contradicted"": 1, ""Unverifiable"": 2}",26.27,results/combined_pipeline_batch/json/11000.json,results/combined_pipeline_batch/logs/11000.log
+4603,Summary,ok,0,0,{},8.35,results/combined_pipeline_batch/json/4603.json,results/combined_pipeline_batch/logs/4603.log
+17340,QA,ok,0,0,{},9.4,results/combined_pipeline_batch/json/17340.json,results/combined_pipeline_batch/logs/17340.log
+11555,Data2Txt,ok,0,0,{},8.99,results/combined_pipeline_batch/json/11555.json,results/combined_pipeline_batch/logs/11555.log
+5553,Summary,ok,1,1,"{""Partially Supported"": 1}",14.16,results/combined_pipeline_batch/json/5553.json,results/combined_pipeline_batch/logs/5553.log
+17640,QA,ok,0,0,{},9.22,results/combined_pipeline_batch/json/17640.json,results/combined_pipeline_batch/logs/17640.log
+10457,Data2Txt,ok,1,1,"{""Unverifiable"": 1}",16.67,results/combined_pipeline_batch/json/10457.json,results/combined_pipeline_batch/logs/10457.log
+5129,Summary,ok,0,0,{},9.73,results/combined_pipeline_batch/json/5129.json,results/combined_pipeline_batch/logs/5129.log
+12174,QA,ok,0,0,{},8.08,results/combined_pipeline_batch/json/12174.json,results/combined_pipeline_batch/logs/12174.log
+6894,Data2Txt,ok,0,0,{},9.03,results/combined_pipeline_batch/json/6894.json,results/combined_pipeline_batch/logs/6894.log
+945,Summary,ok,0,0,{},9.76,results/combined_pipeline_batch/json/945.json,results/combined_pipeline_batch/logs/945.log
+12824,QA,ok,0,0,{},8.98,results/combined_pipeline_batch/json/12824.json,results/combined_pipeline_batch/logs/12824.log
+9974,Data2Txt,ok,2,2,"{""Unverifiable"": 2}",22.92,results/combined_pipeline_batch/json/9974.json,results/combined_pipeline_batch/logs/9974.log
+309,Summary,ok,0,0,{},10.64,results/combined_pipeline_batch/json/309.json,results/combined_pipeline_batch/logs/309.log
+14497,QA,ok,0,0,{},8.37,results/combined_pipeline_batch/json/14497.json,results/combined_pipeline_batch/logs/14497.log
+11413,Data2Txt,ok,0,0,{},9.57,results/combined_pipeline_batch/json/11413.json,results/combined_pipeline_batch/logs/11413.log
+378,Summary,ok,0,0,{},9.17,results/combined_pipeline_batch/json/378.json,results/combined_pipeline_batch/logs/378.log
+15663,QA,error_exit_1,0,0,{},310.76,results/combined_pipeline_batch/json/15663.json,results/combined_pipeline_batch/logs/15663.log
+10953,Data2Txt,ok,0,0,{},10.05,results/combined_pipeline_batch/json/10953.json,results/combined_pipeline_batch/logs/10953.log
+3929,Summary,ok,0,0,{},9.67,results/combined_pipeline_batch/json/3929.json,results/combined_pipeline_batch/logs/3929.log
+14425,QA,ok,0,0,{},8.23,results/combined_pipeline_batch/json/14425.json,results/combined_pipeline_batch/logs/14425.log
+11764,Data2Txt,ok,7,7,"{""Contradicted"": 3, ""Unverifiable"": 4}",54.74,results/combined_pipeline_batch/json/11764.json,results/combined_pipeline_batch/logs/11764.log
+1310,Summary,ok,0,0,{},10.28,results/combined_pipeline_batch/json/1310.json,results/combined_pipeline_batch/logs/1310.log
+17132,QA,ok,6,6,"{""Unverifiable"": 6}",40.08,results/combined_pipeline_batch/json/17132.json,results/combined_pipeline_batch/logs/17132.log
+9969,Data2Txt,ok,2,2,"{""Contradicted"": 2}",22.37,results/combined_pipeline_batch/json/9969.json,results/combined_pipeline_batch/logs/9969.log
+2104,Summary,ok,0,0,{},10.23,results/combined_pipeline_batch/json/2104.json,results/combined_pipeline_batch/logs/2104.log
+14317,QA,ok,0,0,{},8.63,results/combined_pipeline_batch/json/14317.json,results/combined_pipeline_batch/logs/14317.log
+9296,Data2Txt,ok,0,0,{},9.01,results/combined_pipeline_batch/json/9296.json,results/combined_pipeline_batch/logs/9296.log
+678,Summary,ok,0,0,{},10.18,results/combined_pipeline_batch/json/678.json,results/combined_pipeline_batch/logs/678.log
+14686,QA,ok,0,0,{},8.31,results/combined_pipeline_batch/json/14686.json,results/combined_pipeline_batch/logs/14686.log
+8036,Data2Txt,ok,2,2,"{""Unverifiable"": 2}",22.51,results/combined_pipeline_batch/json/8036.json,results/combined_pipeline_batch/logs/8036.log
+3543,Summary,ok,0,0,{},9.99,results/combined_pipeline_batch/json/3543.json,results/combined_pipeline_batch/logs/3543.log
+16523,QA,error_exit_1,0,0,{},314.94,results/combined_pipeline_batch/json/16523.json,results/combined_pipeline_batch/logs/16523.log
+7193,Data2Txt,ok,1,1,"{""Unverifiable"": 1}",16.3,results/combined_pipeline_batch/json/7193.json,results/combined_pipeline_batch/logs/7193.log
+2628,Summary,ok,0,0,{},8.62,results/combined_pipeline_batch/json/2628.json,results/combined_pipeline_batch/logs/2628.log
+17050,QA,ok,0,0,{},8.64,results/combined_pipeline_batch/json/17050.json,results/combined_pipeline_batch/logs/17050.log
+6399,Data2Txt,ok,0,0,{},9.68,results/combined_pipeline_batch/json/6399.json,results/combined_pipeline_batch/logs/6399.log
+202,Summary,ok,0,0,{},9.33,results/combined_pipeline_batch/json/202.json,results/combined_pipeline_batch/logs/202.log
+15324,QA,ok,0,0,{},8.52,results/combined_pipeline_batch/json/15324.json,results/combined_pipeline_batch/logs/15324.log
+10596,Data2Txt,ok,0,0,{},9.66,results/combined_pipeline_batch/json/10596.json,results/combined_pipeline_batch/logs/10596.log
+1753,Summary,ok,0,0,{},9.81,results/combined_pipeline_batch/json/1753.json,results/combined_pipeline_batch/logs/1753.log
+14589,QA,ok,4,4,"{""Supported"": 2, ""Partially Supported"": 1, ""Unverifiable"": 1}",30.43,results/combined_pipeline_batch/json/14589.json,results/combined_pipeline_batch/logs/14589.log
+6101,Data2Txt,ok,3,3,"{""Partially Supported"": 1, ""Unverifiable"": 2}",30.68,results/combined_pipeline_batch/json/6101.json,results/combined_pipeline_batch/logs/6101.log
+3889,Summary,ok,0,0,{},9.2,results/combined_pipeline_batch/json/3889.json,results/combined_pipeline_batch/logs/3889.log
+16282,QA,error_exit_1,0,0,{},310.06,results/combined_pipeline_batch/json/16282.json,results/combined_pipeline_batch/logs/16282.log
+10532,Data2Txt,ok,3,3,"{""Partially Supported"": 2, ""Contradicted"": 1}",33.46,results/combined_pipeline_batch/json/10532.json,results/combined_pipeline_batch/logs/10532.log
+1947,Summary,ok,1,1,"{""Contradicted"": 1}",18.76,results/combined_pipeline_batch/json/1947.json,results/combined_pipeline_batch/logs/1947.log
+14224,QA,ok,0,0,{},10.02,results/combined_pipeline_batch/json/14224.json,results/combined_pipeline_batch/logs/14224.log
+11257,Data2Txt,ok,1,1,"{""Contradicted"": 1}",17.77,results/combined_pipeline_batch/json/11257.json,results/combined_pipeline_batch/logs/11257.log
+3692,Summary,ok,1,1,"{""Unverifiable"": 1}",18.09,results/combined_pipeline_batch/json/3692.json,results/combined_pipeline_batch/logs/3692.log
+17654,QA,ok,0,0,{},8.68,results/combined_pipeline_batch/json/17654.json,results/combined_pipeline_batch/logs/17654.log
+8456,Data2Txt,ok,3,3,"{""Unverifiable"": 2, ""Contradicted"": 1}",30.67,results/combined_pipeline_batch/json/8456.json,results/combined_pipeline_batch/logs/8456.log
+2840,Summary,ok,0,0,{},8.73,results/combined_pipeline_batch/json/2840.json,results/combined_pipeline_batch/logs/2840.log
+12985,QA,ok,0,0,{},8.1,results/combined_pipeline_batch/json/12985.json,results/combined_pipeline_batch/logs/12985.log
+6834,Data2Txt,ok,0,0,{},8.84,results/combined_pipeline_batch/json/6834.json,results/combined_pipeline_batch/logs/6834.log
+5209,Summary,ok,2,2,"{""Unverifiable"": 2}",21.5,results/combined_pipeline_batch/json/5209.json,results/combined_pipeline_batch/logs/5209.log
+13224,QA,ok,0,0,{},8.45,results/combined_pipeline_batch/json/13224.json,results/combined_pipeline_batch/logs/13224.log
+9689,Data2Txt,ok,3,3,"{""Unverifiable"": 3}",33.5,results/combined_pipeline_batch/json/9689.json,results/combined_pipeline_batch/logs/9689.log
+1035,Summary,ok,1,1,"{""Partially Supported"": 1}",19.11,results/combined_pipeline_batch/json/1035.json,results/combined_pipeline_batch/logs/1035.log
+13045,QA,ok,0,0,{},9.05,results/combined_pipeline_batch/json/13045.json,results/combined_pipeline_batch/logs/13045.log
+9112,Data2Txt,ok,6,6,"{""Unverifiable"": 5, ""Partially Supported"": 1}",55.15,results/combined_pipeline_batch/json/9112.json,results/combined_pipeline_batch/logs/9112.log
+5492,Summary,ok,1,1,"{""Unverifiable"": 1}",16.29,results/combined_pipeline_batch/json/5492.json,results/combined_pipeline_batch/logs/5492.log
+13050,QA,ok,0,0,{},8.89,results/combined_pipeline_batch/json/13050.json,results/combined_pipeline_batch/logs/13050.log
+5805,Data2Txt,ok,3,3,"{""Contradicted"": 1, ""Unverifiable"": 2}",29.72,results/combined_pipeline_batch/json/5805.json,results/combined_pipeline_batch/logs/5805.log
+790,Summary,ok,1,1,"{""Unverifiable"": 1}",17.4,results/combined_pipeline_batch/json/790.json,results/combined_pipeline_batch/logs/790.log
+13569,QA,ok,2,2,"{""Unverifiable"": 2}",23.82,results/combined_pipeline_batch/json/13569.json,results/combined_pipeline_batch/logs/13569.log
+8699,Data2Txt,error_exit_1,0,0,{},315.13,results/combined_pipeline_batch/json/8699.json,results/combined_pipeline_batch/logs/8699.log
+360,Summary,ok,0,0,{},10.19,results/combined_pipeline_batch/json/360.json,results/combined_pipeline_batch/logs/360.log
+17670,QA,ok,0,0,{},9.81,results/combined_pipeline_batch/json/17670.json,results/combined_pipeline_batch/logs/17670.log
+7805,Data2Txt,ok,1,1,"{""Partially Supported"": 1}",18.52,results/combined_pipeline_batch/json/7805.json,results/combined_pipeline_batch/logs/7805.log
+967,Summary,ok,0,0,{},8.26,results/combined_pipeline_batch/json/967.json,results/combined_pipeline_batch/logs/967.log
+12239,QA,ok,0,0,{},7.96,results/combined_pipeline_batch/json/12239.json,results/combined_pipeline_batch/logs/12239.log
+11526,Data2Txt,ok,0,0,{},12.55,results/combined_pipeline_batch/json/11526.json,results/combined_pipeline_batch/logs/11526.log
+1301,Summary,ok,1,1,"{""Contradicted"": 1}",18.9,results/combined_pipeline_batch/json/1301.json,results/combined_pipeline_batch/logs/1301.log
+12192,QA,ok,0,0,{},9.11,results/combined_pipeline_batch/json/12192.json,results/combined_pipeline_batch/logs/12192.log
+9227,Data2Txt,ok,5,5,"{""Partially Supported"": 2, ""Unverifiable"": 3}",49.2,results/combined_pipeline_batch/json/9227.json,results/combined_pipeline_batch/logs/9227.log
+2578,Summary,ok,3,3,"{""Unverifiable"": 2, ""Partially Supported"": 1}",31.17,results/combined_pipeline_batch/json/2578.json,results/combined_pipeline_batch/logs/2578.log
+15952,QA,ok,0,0,{},8.14,results/combined_pipeline_batch/json/15952.json,results/combined_pipeline_batch/logs/15952.log
+11107,Data2Txt,ok,0,0,{},9.34,results/combined_pipeline_batch/json/11107.json,results/combined_pipeline_batch/logs/11107.log
+2710,Summary,ok,0,0,{},10.24,results/combined_pipeline_batch/json/2710.json,results/combined_pipeline_batch/logs/2710.log
+16928,QA,ok,5,5,"{""Unverifiable"": 4, ""Contradicted"": 1}",32.57,results/combined_pipeline_batch/json/16928.json,results/combined_pipeline_batch/logs/16928.log
+6133,Data2Txt,ok,0,0,{},9.03,results/combined_pipeline_batch/json/6133.json,results/combined_pipeline_batch/logs/6133.log
+2396,Summary,ok,0,0,{},8.24,results/combined_pipeline_batch/json/2396.json,results/combined_pipeline_batch/logs/2396.log
+13286,QA,ok,1,1,"{""Unverifiable"": 1}",15.27,results/combined_pipeline_batch/json/13286.json,results/combined_pipeline_batch/logs/13286.log
+7339,Data2Txt,ok,1,1,"{""Unverifiable"": 1}",20.19,results/combined_pipeline_batch/json/7339.json,results/combined_pipeline_batch/logs/7339.log
+5265,Summary,ok,0,0,{},9.26,results/combined_pipeline_batch/json/5265.json,results/combined_pipeline_batch/logs/5265.log
+11986,QA,ok,0,0,{},8.19,results/combined_pipeline_batch/json/11986.json,results/combined_pipeline_batch/logs/11986.log
+11135,Data2Txt,ok,1,1,"{""Unverifiable"": 1}",20.1,results/combined_pipeline_batch/json/11135.json,results/combined_pipeline_batch/logs/11135.log
+939,Summary,ok,0,0,{},9.37,results/combined_pipeline_batch/json/939.json,results/combined_pipeline_batch/logs/939.log
+15922,QA,ok,0,0,{},8.24,results/combined_pipeline_batch/json/15922.json,results/combined_pipeline_batch/logs/15922.log
+10104,Data2Txt,ok,0,0,{},9.31,results/combined_pipeline_batch/json/10104.json,results/combined_pipeline_batch/logs/10104.log
+2063,Summary,ok,0,0,{},10.04,results/combined_pipeline_batch/json/2063.json,results/combined_pipeline_batch/logs/2063.log
+12800,QA,ok,1,1,"{""Unverifiable"": 1}",14.63,results/combined_pipeline_batch/json/12800.json,results/combined_pipeline_batch/logs/12800.log
+7245,Data2Txt,ok,1,1,"{""Unverifiable"": 1}",19.03,results/combined_pipeline_batch/json/7245.json,results/combined_pipeline_batch/logs/7245.log
+2864,Summary,ok,1,1,"{""Partially Supported"": 1}",18.4,results/combined_pipeline_batch/json/2864.json,results/combined_pipeline_batch/logs/2864.log
+12491,QA,ok,0,0,{},8.28,results/combined_pipeline_batch/json/12491.json,results/combined_pipeline_batch/logs/12491.log
+11850,Data2Txt,ok,4,4,"{""Unverifiable"": 4}",35.22,results/combined_pipeline_batch/json/11850.json,results/combined_pipeline_batch/logs/11850.log
+1483,Summary,ok,3,3,"{""Unverifiable"": 2, ""Partially Supported"": 1}",32.37,results/combined_pipeline_batch/json/1483.json,results/combined_pipeline_batch/logs/1483.log
+14438,QA,ok,0,0,{},9.2,results/combined_pipeline_batch/json/14438.json,results/combined_pipeline_batch/logs/14438.log
+8587,Data2Txt,ok,2,2,"{""Unverifiable"": 2}",22.09,results/combined_pipeline_batch/json/8587.json,results/combined_pipeline_batch/logs/8587.log
+2441,Summary,ok,0,0,{},8.77,results/combined_pipeline_batch/json/2441.json,results/combined_pipeline_batch/logs/2441.log
+12283,QA,ok,0,0,{},8.59,results/combined_pipeline_batch/json/12283.json,results/combined_pipeline_batch/logs/12283.log
+11827,Data2Txt,ok,0,0,{},10.69,results/combined_pipeline_batch/json/11827.json,results/combined_pipeline_batch/logs/11827.log
+3423,Summary,ok,2,2,"{""Supported"": 2}",24.87,results/combined_pipeline_batch/json/3423.json,results/combined_pipeline_batch/logs/3423.log
+12064,QA,ok,0,0,{},8.61,results/combined_pipeline_batch/json/12064.json,results/combined_pipeline_batch/logs/12064.log
+6968,Data2Txt,ok,3,3,"{""Unknown (inspect JSON)"": 1, ""Unverifiable"": 2}",27.82,results/combined_pipeline_batch/json/6968.json,results/combined_pipeline_batch/logs/6968.log
+1254,Summary,ok,0,0,{},7.84,results/combined_pipeline_batch/json/1254.json,results/combined_pipeline_batch/logs/1254.log
+14086,QA,ok,0,0,{},8.05,results/combined_pipeline_batch/json/14086.json,results/combined_pipeline_batch/logs/14086.log
+10175,Data2Txt,ok,0,0,{},8.91,results/combined_pipeline_batch/json/10175.json,results/combined_pipeline_batch/logs/10175.log
+2645,Summary,ok,0,0,{},11.27,results/combined_pipeline_batch/json/2645.json,results/combined_pipeline_batch/logs/2645.log
+15645,QA,ok,0,0,{},8.63,results/combined_pipeline_batch/json/15645.json,results/combined_pipeline_batch/logs/15645.log
+7846,Data2Txt,ok,2,2,"{""Unverifiable"": 2}",28.94,results/combined_pipeline_batch/json/7846.json,results/combined_pipeline_batch/logs/7846.log
+5064,Summary,ok,0,0,{},9.42,results/combined_pipeline_batch/json/5064.json,results/combined_pipeline_batch/logs/5064.log
+12855,QA,ok,4,4,"{""Unverifiable"": 2, ""Partially Supported"": 1, ""Contradicted"": 1}",38.33,results/combined_pipeline_batch/json/12855.json,results/combined_pipeline_batch/logs/12855.log
+6492,Data2Txt,ok,0,0,{},10.82,results/combined_pipeline_batch/json/6492.json,results/combined_pipeline_batch/logs/6492.log
+416,Summary,ok,0,0,{},9.26,results/combined_pipeline_batch/json/416.json,results/combined_pipeline_batch/logs/416.log
+12388,QA,ok,2,2,"{""Partially Supported"": 2}",27.13,results/combined_pipeline_batch/json/12388.json,results/combined_pipeline_batch/logs/12388.log
+11806,Data2Txt,ok,2,2,"{""Unverifiable"": 2}",25.09,results/combined_pipeline_batch/json/11806.json,results/combined_pipeline_batch/logs/11806.log
+5636,Summary,ok,0,0,{},9.23,results/combined_pipeline_batch/json/5636.json,results/combined_pipeline_batch/logs/5636.log
+16062,QA,ok,0,0,{},7.99,results/combined_pipeline_batch/json/16062.json,results/combined_pipeline_batch/logs/16062.log
+5874,Data2Txt,ok,0,0,{},8.69,results/combined_pipeline_batch/json/5874.json,results/combined_pipeline_batch/logs/5874.log
+1807,Summary,ok,0,0,{},9.6,results/combined_pipeline_batch/json/1807.json,results/combined_pipeline_batch/logs/1807.log
+14555,QA,ok,1,1,"{""Partially Supported"": 1}",15.4,results/combined_pipeline_batch/json/14555.json,results/combined_pipeline_batch/logs/14555.log
+9137,Data2Txt,ok,3,3,"{""Unverifiable"": 2, ""Partially Supported"": 1}",32.38,results/combined_pipeline_batch/json/9137.json,results/combined_pipeline_batch/logs/9137.log
+4981,Summary,ok,0,0,{},9.91,results/combined_pipeline_batch/json/4981.json,results/combined_pipeline_batch/logs/4981.log
+12155,QA,ok,0,0,{},8.95,results/combined_pipeline_batch/json/12155.json,results/combined_pipeline_batch/logs/12155.log
+9374,Data2Txt,ok,0,0,{},8.77,results/combined_pipeline_batch/json/9374.json,results/combined_pipeline_batch/logs/9374.log
+87,Summary,ok,1,1,"{""Supported"": 1}",14.77,results/combined_pipeline_batch/json/87.json,results/combined_pipeline_batch/logs/87.log
+12896,QA,ok,1,1,"{""Partially Supported"": 1}",19.58,results/combined_pipeline_batch/json/12896.json,results/combined_pipeline_batch/logs/12896.log
+8968,Data2Txt,ok,5,5,"{""Contradicted"": 4, ""Unverifiable"": 1}",41.51,results/combined_pipeline_batch/json/8968.json,results/combined_pipeline_batch/logs/8968.log
+4991,Summary,ok,0,0,{},9.25,results/combined_pipeline_batch/json/4991.json,results/combined_pipeline_batch/logs/4991.log
+17226,QA,ok,0,0,{},9.06,results/combined_pipeline_batch/json/17226.json,results/combined_pipeline_batch/logs/17226.log
+11607,Data2Txt,ok,0,0,{},9.79,results/combined_pipeline_batch/json/11607.json,results/combined_pipeline_batch/logs/11607.log
+3895,Summary,ok,0,0,{},8.88,results/combined_pipeline_batch/json/3895.json,results/combined_pipeline_batch/logs/3895.log
+15594,QA,ok,0,0,{},8.6,results/combined_pipeline_batch/json/15594.json,results/combined_pipeline_batch/logs/15594.log
+7428,Data2Txt,ok,1,1,"{""Unverifiable"": 1}",17.91,results/combined_pipeline_batch/json/7428.json,results/combined_pipeline_batch/logs/7428.log
+4816,Summary,ok,0,0,{},10.28,results/combined_pipeline_batch/json/4816.json,results/combined_pipeline_batch/logs/4816.log
+13855,QA,ok,0,0,{},8.46,results/combined_pipeline_batch/json/13855.json,results/combined_pipeline_batch/logs/13855.log
+8677,Data2Txt,ok,0,0,{},10.32,results/combined_pipeline_batch/json/8677.json,results/combined_pipeline_batch/logs/8677.log
+2804,Summary,ok,0,0,{},8.46,results/combined_pipeline_batch/json/2804.json,results/combined_pipeline_batch/logs/2804.log
+16495,QA,ok,0,0,{},7.95,results/combined_pipeline_batch/json/16495.json,results/combined_pipeline_batch/logs/16495.log
+9417,Data2Txt,ok,1,1,"{""Unverifiable"": 1}",17.12,results/combined_pipeline_batch/json/9417.json,results/combined_pipeline_batch/logs/9417.log
+5190,Summary,ok,1,1,"{""Supported"": 1}",15.53,results/combined_pipeline_batch/json/5190.json,results/combined_pipeline_batch/logs/5190.log
+17135,QA,ok,2,2,"{""Unverifiable"": 1, ""Unknown (inspect JSON)"": 1}",23.25,results/combined_pipeline_batch/json/17135.json,results/combined_pipeline_batch/logs/17135.log
+9711,Data2Txt,ok,1,1,"{""Unverifiable"": 1}",16.2,results/combined_pipeline_batch/json/9711.json,results/combined_pipeline_batch/logs/9711.log
+116,Summary,ok,0,0,{},11.49,results/combined_pipeline_batch/json/116.json,results/combined_pipeline_batch/logs/116.log
+12238,QA,ok,0,0,{},8.58,results/combined_pipeline_batch/json/12238.json,results/combined_pipeline_batch/logs/12238.log
+10644,Data2Txt,ok,0,0,{},9.38,results/combined_pipeline_batch/json/10644.json,results/combined_pipeline_batch/logs/10644.log
+4322,Summary,ok,1,1,"{""Unverifiable"": 1}",16.9,results/combined_pipeline_batch/json/4322.json,results/combined_pipeline_batch/logs/4322.log
+12130,QA,ok,0,0,{},9.22,results/combined_pipeline_batch/json/12130.json,results/combined_pipeline_batch/logs/12130.log
+5915,Data2Txt,ok,4,4,"{""Unknown (inspect JSON)"": 1, ""Unverifiable"": 2, ""Contradicted"": 1}",39.24,results/combined_pipeline_batch/json/5915.json,results/combined_pipeline_batch/logs/5915.log
+5358,Summary,ok,0,0,{},10.17,results/combined_pipeline_batch/json/5358.json,results/combined_pipeline_batch/logs/5358.log
+17022,QA,ok,0,0,{},9.5,results/combined_pipeline_batch/json/17022.json,results/combined_pipeline_batch/logs/17022.log
+9386,Data2Txt,ok,3,3,"{""Unverifiable"": 2, ""Unknown (inspect JSON)"": 1}",31.43,results/combined_pipeline_batch/json/9386.json,results/combined_pipeline_batch/logs/9386.log
+4896,Summary,ok,0,0,{},10.54,results/combined_pipeline_batch/json/4896.json,results/combined_pipeline_batch/logs/4896.log
+16029,QA,ok,0,0,{},8.58,results/combined_pipeline_batch/json/16029.json,results/combined_pipeline_batch/logs/16029.log
+8856,Data2Txt,ok,0,0,{},9.29,results/combined_pipeline_batch/json/8856.json,results/combined_pipeline_batch/logs/8856.log
+74,Summary,ok,0,0,{},10.58,results/combined_pipeline_batch/json/74.json,results/combined_pipeline_batch/logs/74.log
+17072,QA,ok,0,0,{},8.35,results/combined_pipeline_batch/json/17072.json,results/combined_pipeline_batch/logs/17072.log
+11308,Data2Txt,ok,2,2,"{""Unverifiable"": 1, ""Partially Supported"": 1}",23.83,results/combined_pipeline_batch/json/11308.json,results/combined_pipeline_batch/logs/11308.log
+2727,Summary,ok,1,1,"{""Partially Supported"": 1}",17.87,results/combined_pipeline_batch/json/2727.json,results/combined_pipeline_batch/logs/2727.log
+16750,QA,ok,0,0,{},9.25,results/combined_pipeline_batch/json/16750.json,results/combined_pipeline_batch/logs/16750.log
+9518,Data2Txt,ok,3,3,"{""Unverifiable"": 3}",32.74,results/combined_pipeline_batch/json/9518.json,results/combined_pipeline_batch/logs/9518.log
+5489,Summary,ok,0,0,{},10.09,results/combined_pipeline_batch/json/5489.json,results/combined_pipeline_batch/logs/5489.log
+15595,QA,ok,0,0,{},8.85,results/combined_pipeline_batch/json/15595.json,results/combined_pipeline_batch/logs/15595.log
+9011,Data2Txt,ok,1,1,"{""Unverifiable"": 1}",17.81,results/combined_pipeline_batch/json/9011.json,results/combined_pipeline_batch/logs/9011.log
+1779,Summary,ok,0,0,{},9.06,results/combined_pipeline_batch/json/1779.json,results/combined_pipeline_batch/logs/1779.log
+16145,QA,ok,2,2,"{""Unverifiable"": 2}",23.34,results/combined_pipeline_batch/json/16145.json,results/combined_pipeline_batch/logs/16145.log
+7857,Data2Txt,ok,1,1,"{""Unverifiable"": 1}",18.13,results/combined_pipeline_batch/json/7857.json,results/combined_pipeline_batch/logs/7857.log
+2571,Summary,ok,0,0,{},11.5,results/combined_pipeline_batch/json/2571.json,results/combined_pipeline_batch/logs/2571.log
+14350,QA,ok,3,3,"{""Unverifiable"": 3}",28.48,results/combined_pipeline_batch/json/14350.json,results/combined_pipeline_batch/logs/14350.log
+7417,Data2Txt,ok,2,2,"{""Partially Supported"": 1, ""Unverifiable"": 1}",26.58,results/combined_pipeline_batch/json/7417.json,results/combined_pipeline_batch/logs/7417.log
+505,Summary,ok,0,0,{},11.74,results/combined_pipeline_batch/json/505.json,results/combined_pipeline_batch/logs/505.log
+15843,QA,ok,0,0,{},9.26,results/combined_pipeline_batch/json/15843.json,results/combined_pipeline_batch/logs/15843.log
+6637,Data2Txt,ok,0,0,{},9.14,results/combined_pipeline_batch/json/6637.json,results/combined_pipeline_batch/logs/6637.log
+4326,Summary,ok,0,0,{},9.22,results/combined_pipeline_batch/json/4326.json,results/combined_pipeline_batch/logs/4326.log
+14604,QA,ok,0,0,{},10.46,results/combined_pipeline_batch/json/14604.json,results/combined_pipeline_batch/logs/14604.log
+9827,Data2Txt,error_exit_1,0,0,{},316.06,results/combined_pipeline_batch/json/9827.json,results/combined_pipeline_batch/logs/9827.log
+1373,Summary,ok,1,1,"{""Partially Supported"": 1}",19.63,results/combined_pipeline_batch/json/1373.json,results/combined_pipeline_batch/logs/1373.log
+14312,QA,ok,0,0,{},8.54,results/combined_pipeline_batch/json/14312.json,results/combined_pipeline_batch/logs/14312.log
+11617,Data2Txt,ok,0,0,{},9.62,results/combined_pipeline_batch/json/11617.json,results/combined_pipeline_batch/logs/11617.log
+3487,Summary,ok,0,0,{},9.35,results/combined_pipeline_batch/json/3487.json,results/combined_pipeline_batch/logs/3487.log
+16104,QA,ok,0,0,{},7.78,results/combined_pipeline_batch/json/16104.json,results/combined_pipeline_batch/logs/16104.log
+8617,Data2Txt,ok,0,0,{},9.85,results/combined_pipeline_batch/json/8617.json,results/combined_pipeline_batch/logs/8617.log
+2915,Summary,ok,0,0,{},12.24,results/combined_pipeline_batch/json/2915.json,results/combined_pipeline_batch/logs/2915.log
+14963,QA,ok,0,0,{},10.16,results/combined_pipeline_batch/json/14963.json,results/combined_pipeline_batch/logs/14963.log
+11432,Data2Txt,ok,3,3,"{""Unverifiable"": 3}",31.43,results/combined_pipeline_batch/json/11432.json,results/combined_pipeline_batch/logs/11432.log
+1659,Summary,ok,0,0,{},9.67,results/combined_pipeline_batch/json/1659.json,results/combined_pipeline_batch/logs/1659.log
+15938,QA,ok,0,0,{},10.14,results/combined_pipeline_batch/json/15938.json,results/combined_pipeline_batch/logs/15938.log
+11023,Data2Txt,ok,1,1,"{""Unverifiable"": 1}",16.81,results/combined_pipeline_batch/json/11023.json,results/combined_pipeline_batch/logs/11023.log
+1583,Summary,ok,0,0,{},9.04,results/combined_pipeline_batch/json/1583.json,results/combined_pipeline_batch/logs/1583.log
+14736,QA,ok,0,0,{},8.89,results/combined_pipeline_batch/json/14736.json,results/combined_pipeline_batch/logs/14736.log
+8192,Data2Txt,ok,0,0,{},9.32,results/combined_pipeline_batch/json/8192.json,results/combined_pipeline_batch/logs/8192.log
+1841,Summary,ok,0,0,{},9.82,results/combined_pipeline_batch/json/1841.json,results/combined_pipeline_batch/logs/1841.log
+15247,QA,ok,0,0,{},9.19,results/combined_pipeline_batch/json/15247.json,results/combined_pipeline_batch/logs/15247.log
+5744,Data2Txt,ok,1,1,"{""Unverifiable"": 1}",17.78,results/combined_pipeline_batch/json/5744.json,results/combined_pipeline_batch/logs/5744.log
+2901,Summary,ok,1,1,"{""Unknown (inspect JSON)"": 1}",16.72,results/combined_pipeline_batch/json/2901.json,results/combined_pipeline_batch/logs/2901.log
+17189,QA,ok,0,0,{},9.45,results/combined_pipeline_batch/json/17189.json,results/combined_pipeline_batch/logs/17189.log
+9020,Data2Txt,ok,2,2,"{""Contradicted"": 1, ""Partially Supported"": 1}",23.75,results/combined_pipeline_batch/json/9020.json,results/combined_pipeline_batch/logs/9020.log
+3326,Summary,ok,0,0,{},9.16,results/combined_pipeline_batch/json/3326.json,results/combined_pipeline_batch/logs/3326.log
+16800,QA,ok,0,0,{},8.1,results/combined_pipeline_batch/json/16800.json,results/combined_pipeline_batch/logs/16800.log
+9285,Data2Txt,ok,0,0,{},9.73,results/combined_pipeline_batch/json/9285.json,results/combined_pipeline_batch/logs/9285.log
+2585,Summary,ok,0,0,{},8.02,results/combined_pipeline_batch/json/2585.json,results/combined_pipeline_batch/logs/2585.log
+14983,QA,ok,0,0,{},9.22,results/combined_pipeline_batch/json/14983.json,results/combined_pipeline_batch/logs/14983.log
+10719,Data2Txt,ok,1,1,"{""Unverifiable"": 1}",15.89,results/combined_pipeline_batch/json/10719.json,results/combined_pipeline_batch/logs/10719.log
+5156,Summary,ok,5,5,"{""Unverifiable"": 5}",33.22,results/combined_pipeline_batch/json/5156.json,results/combined_pipeline_batch/logs/5156.log
+16525,QA,ok,0,0,{},8.06,results/combined_pipeline_batch/json/16525.json,results/combined_pipeline_batch/logs/16525.log
+8025,Data2Txt,ok,1,1,"{""Unverifiable"": 1}",16.92,results/combined_pipeline_batch/json/8025.json,results/combined_pipeline_batch/logs/8025.log
+4568,Summary,ok,1,1,"{""Unverifiable"": 1}",16.58,results/combined_pipeline_batch/json/4568.json,results/combined_pipeline_batch/logs/4568.log
+16496,QA,ok,0,0,{},8.06,results/combined_pipeline_batch/json/16496.json,results/combined_pipeline_batch/logs/16496.log
+11808,Data2Txt,ok,1,1,"{""Partially Supported"": 1}",16.05,results/combined_pipeline_batch/json/11808.json,results/combined_pipeline_batch/logs/11808.log
+3333,Summary,ok,0,0,{},8.97,results/combined_pipeline_batch/json/3333.json,results/combined_pipeline_batch/logs/3333.log
+17430,QA,ok,0,0,{},9.95,results/combined_pipeline_batch/json/17430.json,results/combined_pipeline_batch/logs/17430.log
+9393,Data2Txt,ok,1,1,"{""Unverifiable"": 1}",16.0,results/combined_pipeline_batch/json/9393.json,results/combined_pipeline_batch/logs/9393.log
+4369,Summary,ok,0,0,{},9.16,results/combined_pipeline_batch/json/4369.json,results/combined_pipeline_batch/logs/4369.log
+14969,QA,ok,0,0,{},9.59,results/combined_pipeline_batch/json/14969.json,results/combined_pipeline_batch/logs/14969.log
+8595,Data2Txt,ok,3,3,"{""Unverifiable"": 3}",28.47,results/combined_pipeline_batch/json/8595.json,results/combined_pipeline_batch/logs/8595.log
+5334,Summary,ok,0,0,{},9.17,results/combined_pipeline_batch/json/5334.json,results/combined_pipeline_batch/logs/5334.log
+12041,QA,ok,0,0,{},8.84,results/combined_pipeline_batch/json/12041.json,results/combined_pipeline_batch/logs/12041.log
+9344,Data2Txt,ok,7,7,"{""Contradicted"": 1, ""Unverifiable"": 4, ""Unknown (inspect JSON)"": 2}",51.85,results/combined_pipeline_batch/json/9344.json,results/combined_pipeline_batch/logs/9344.log
+168,Summary,ok,0,0,{},14.39,results/combined_pipeline_batch/json/168.json,results/combined_pipeline_batch/logs/168.log
+15064,QA,ok,0,0,{},9.31,results/combined_pipeline_batch/json/15064.json,results/combined_pipeline_batch/logs/15064.log
+9425,Data2Txt,ok,2,2,"{""Unverifiable"": 2}",24.51,results/combined_pipeline_batch/json/9425.json,results/combined_pipeline_batch/logs/9425.log
+808,Summary,ok,0,0,{},12.77,results/combined_pipeline_batch/json/808.json,results/combined_pipeline_batch/logs/808.log
+17067,QA,ok,2,2,"{""Unverifiable"": 1, ""Unknown (inspect JSON)"": 1}",23.37,results/combined_pipeline_batch/json/17067.json,results/combined_pipeline_batch/logs/17067.log
+8425,Data2Txt,ok,0,0,{},10.49,results/combined_pipeline_batch/json/8425.json,results/combined_pipeline_batch/logs/8425.log
+404,Summary,ok,1,1,"{""Unverifiable"": 1}",17.94,results/combined_pipeline_batch/json/404.json,results/combined_pipeline_batch/logs/404.log
+15421,QA,ok,0,0,{},8.57,results/combined_pipeline_batch/json/15421.json,results/combined_pipeline_batch/logs/15421.log
+11312,Data2Txt,ok,3,3,"{""Unverifiable"": 1, ""Contradicted"": 2}",30.49,results/combined_pipeline_batch/json/11312.json,results/combined_pipeline_batch/logs/11312.log
+2145,Summary,ok,0,0,{},9.4,results/combined_pipeline_batch/json/2145.json,results/combined_pipeline_batch/logs/2145.log
+17109,QA,ok,0,0,{},10.43,results/combined_pipeline_batch/json/17109.json,results/combined_pipeline_batch/logs/17109.log
+9248,Data2Txt,ok,2,2,"{""Contradicted"": 1, ""Unverifiable"": 1}",24.71,results/combined_pipeline_batch/json/9248.json,results/combined_pipeline_batch/logs/9248.log
+5571,Summary,ok,1,1,"{""Partially Supported"": 1}",17.14,results/combined_pipeline_batch/json/5571.json,results/combined_pipeline_batch/logs/5571.log
+14904,QA,ok,1,1,"{""Partially Supported"": 1}",15.16,results/combined_pipeline_batch/json/14904.json,results/combined_pipeline_batch/logs/14904.log
+6528,Data2Txt,ok,0,0,{},8.64,results/combined_pipeline_batch/json/6528.json,results/combined_pipeline_batch/logs/6528.log
+705,Summary,ok,1,1,"{""Unknown (inspect JSON)"": 1}",15.0,results/combined_pipeline_batch/json/705.json,results/combined_pipeline_batch/logs/705.log
+17079,QA,ok,0,0,{},8.98,results/combined_pipeline_batch/json/17079.json,results/combined_pipeline_batch/logs/17079.log
+9432,Data2Txt,ok,0,0,{},8.81,results/combined_pipeline_batch/json/9432.json,results/combined_pipeline_batch/logs/9432.log
+3039,Summary,ok,0,0,{},7.87,results/combined_pipeline_batch/json/3039.json,results/combined_pipeline_batch/logs/3039.log
+12039,QA,ok,0,0,{},8.44,results/combined_pipeline_batch/json/12039.json,results/combined_pipeline_batch/logs/12039.log
+5809,Data2Txt,ok,2,2,"{""Unverifiable"": 2}",23.13,results/combined_pipeline_batch/json/5809.json,results/combined_pipeline_batch/logs/5809.log
+4366,Summary,ok,2,2,"{""Contradicted"": 1, ""Partially Supported"": 1}",20.4,results/combined_pipeline_batch/json/4366.json,results/combined_pipeline_batch/logs/4366.log
+15419,QA,ok,1,1,"{""Partially Supported"": 1}",16.74,results/combined_pipeline_batch/json/15419.json,results/combined_pipeline_batch/logs/15419.log
+9358,Data2Txt,ok,3,3,"{""Unknown (inspect JSON)"": 1, ""Contradicted"": 1, ""Unverifiable"": 1}",31.01,results/combined_pipeline_batch/json/9358.json,results/combined_pipeline_batch/logs/9358.log
+2478,Summary,ok,0,0,{},9.39,results/combined_pipeline_batch/json/2478.json,results/combined_pipeline_batch/logs/2478.log
+17789,QA,ok,0,0,{},9.18,results/combined_pipeline_batch/json/17789.json,results/combined_pipeline_batch/logs/17789.log
+6668,Data2Txt,ok,3,3,"{""Unverifiable"": 3}",36.75,results/combined_pipeline_batch/json/6668.json,results/combined_pipeline_batch/logs/6668.log
+3595,Summary,ok,0,0,{},13.19,results/combined_pipeline_batch/json/3595.json,results/combined_pipeline_batch/logs/3595.log
+13668,QA,ok,0,0,{},9.8,results/combined_pipeline_batch/json/13668.json,results/combined_pipeline_batch/logs/13668.log
+8206,Data2Txt,ok,2,2,"{""Contradicted"": 1, ""Unverifiable"": 1}",23.37,results/combined_pipeline_batch/json/8206.json,results/combined_pipeline_batch/logs/8206.log
+5015,Summary,ok,0,0,{},8.84,results/combined_pipeline_batch/json/5015.json,results/combined_pipeline_batch/logs/5015.log
+17477,QA,ok,2,2,"{""Contradicted"": 1, ""Partially Supported"": 1}",21.84,results/combined_pipeline_batch/json/17477.json,results/combined_pipeline_batch/logs/17477.log
+9041,Data2Txt,ok,3,3,"{""Unverifiable"": 2, ""Partially Supported"": 1}",30.16,results/combined_pipeline_batch/json/9041.json,results/combined_pipeline_batch/logs/9041.log
+1580,Summary,ok,2,2,"{""Supported"": 1, ""Unknown (inspect JSON)"": 1}",19.71,results/combined_pipeline_batch/json/1580.json,results/combined_pipeline_batch/logs/1580.log
+14820,QA,ok,0,0,{},8.62,results/combined_pipeline_batch/json/14820.json,results/combined_pipeline_batch/logs/14820.log
+10549,Data2Txt,ok,0,0,{},9.08,results/combined_pipeline_batch/json/10549.json,results/combined_pipeline_batch/logs/10549.log
+5493,Summary,ok,1,1,"{""Unknown (inspect JSON)"": 1}",15.45,results/combined_pipeline_batch/json/5493.json,results/combined_pipeline_batch/logs/5493.log
+15137,QA,ok,1,1,"{""Contradicted"": 1}",15.79,results/combined_pipeline_batch/json/15137.json,results/combined_pipeline_batch/logs/15137.log
+9978,Data2Txt,ok,0,0,{},8.86,results/combined_pipeline_batch/json/9978.json,results/combined_pipeline_batch/logs/9978.log
+3792,Summary,ok,0,0,{},8.67,results/combined_pipeline_batch/json/3792.json,results/combined_pipeline_batch/logs/3792.log
