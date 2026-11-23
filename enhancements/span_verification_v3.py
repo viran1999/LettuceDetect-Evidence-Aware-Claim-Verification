@@ -48,7 +48,7 @@ def _verify_one_atomic(atom, evidence_list, task, nli_model, span_context, min_s
         values = {labels[i]: round(float(prob), 4) for i, prob in enumerate(probs)}
         relation = labels[int(probs.argmax())]
         checks.append({'rank': entry.get('rank'), 'evidence': entry['evidence'],
-                       'evidence_used_for_nli': normalized, 'relevance': relevance,
+                       'evidence_used_for_nli': normalized, 'ranking_score': entry.get('score'), 'relevance': relevance,
                        'nli_relation': relation, 'nli_scores': values})
 
     strong_supported = [x for x in checks if x['nli_relation'] == 'entailment'
