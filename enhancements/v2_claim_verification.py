@@ -25,6 +25,13 @@ def add_claim_verification(result, source_info=None):
         to each claim in claims_with_evidence.
     """
 
+    # Keep the existing v2/frontend contract. Enable the enhanced internal
+    # verifier explicitly; omit this variable to use the original v2 behavior.
+    import os
+    if os.getenv("LETTUCE_VERIFIER", "enhanced").strip().lower() == "enhanced":
+        from enhancements.v2_enhanced_adapter import add_enhanced_verification_for_frontend
+        return add_enhanced_verification_for_frontend(result, source_info=source_info)
+
     reviews = result.get("claims_with_evidence", [])
 
     if not reviews:
