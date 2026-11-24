@@ -74,6 +74,30 @@ Example output:
 Now decompose the following input into the smallest
 independently verifiable factual statements.
 
+ADDITIONAL RULES:
+10. If a negative statement joins multiple facts with "or",
+    create a separate negative statement for each fact.
+11. If several adjectives describe the same subject or
+    property, create a separate statement for each adjective.
+12. Never repeat the original compound sentence when its
+    individual facts are already listed.
+13. Do not add facts not expressed in the input.
+
+Example input:
+Although the hotel has no pool or spa, it has quiet, bright,
+modern rooms.
+
+Example output:
+{{
+  "atomic_claims": [
+    "The hotel has no pool.",
+    "The hotel has no spa.",
+    "The hotel has quiet rooms.",
+    "The hotel has bright rooms.",
+    "The hotel has modern rooms."
+  ]
+}}
+
 Input:
 {claim}
 
@@ -97,7 +121,7 @@ Output:
             "required": ["atomic_claims"]
         },
         "options": {"temperature": 0},
-        "keep_alive": 0
+        "keep_alive": "10m"
     }
 
     request = urllib.request.Request(

@@ -3,7 +3,7 @@ from enhancements.ollama_claim_decomposer import decompose_claim
 from enhancements.claim_categorization import categorize_atomic_claims
 
 
-def verify_atomic_claims(claim, evidence, nli_model):
+def verify_atomic_claims(claim, evidence, nli_model, atomic_claims=None):
     """
     Verify a claim against supplied evidence.
 
@@ -18,8 +18,22 @@ def verify_atomic_claims(claim, evidence, nli_model):
     if not isinstance(evidence, str) or not evidence.strip():
         raise ValueError("Evidence must be a non-empty string")
 
-    # Step 1: Automatic claim decomposition
-    atomic_claims = decompose_claim(claim)
+    # Step 1: Reuse preselected atomic claims when supplied.
+    # Otherwise, preserve the existing Qwen decomposition behavior.
+    if atomic_claims is None:
+        atomic_claims = decompose_claim(claim)
+    else:
+        if (
+            not isinstance(atomic_claims, list)
+            or not atomic_claims
+            or not all(
+                isinstance(item, str) and item.strip()
+                for item in atomic_claims
+            )
+        ):
+            raise ValueError("Invalid preselected atomic claims")
+
+        atomic_claims = [item.strip() for item in atomic_claims]
 
     # Step 2: Prepare evidence-claim pairs
     pairs = [
