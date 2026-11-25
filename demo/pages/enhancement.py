@@ -38,6 +38,33 @@ def safe_md(text) -> str:
     return str(text).replace("$", "\\$")
 
 
+def show_original_evidence(claim_result):
+    items = claim_result.get("parent_ranked_evidence")
+    st.markdown("**Original ranked evidence**")
+
+    if not isinstance(items, list) or not items:
+        st.info("Original ranked evidence is unavailable.")
+        return
+
+    for rank, item in enumerate(items[:3], start=1):
+        passage = item if isinstance(item, str) else None
+
+        if isinstance(item, dict):
+            for key in ("evidence", "text", "passage", "paragraph", "content"):
+                value = item.get(key)
+                if isinstance(value, str) and value.strip():
+                    passage = value
+                    break
+
+        with st.expander(f"Rank {rank}"):
+            if passage:
+                st.text(passage)
+            else:
+                st.warning("Passage text is unavailable.")
+
+    if len(items) < 3:
+        st.caption(f"Only {len(items)} original passages available.")
+
 @st.cache_resource(show_spinner="Loading Hybrid Evidence Ranking v2 (first time only)...")
 def load_evidence_ranker():
     from run_baseline_evidence_integration import create_ranker
@@ -93,7 +120,7 @@ def show_claim_card(number, item):
                         st.markdown(f"**#{passage.get('rank')}** — {safe_md(passage.get('evidence', ''))}")
         else:
             st.warning("No evidence was found for this claim.")
-
+        show_original_evidence(item)
         st.markdown("👨‍⚖️ **Verdict**")
         if not verification:
             st.warning(f"No verdict: {item.get('verification_status', 'not verified')}")
