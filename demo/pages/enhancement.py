@@ -63,7 +63,7 @@ def show_original_evidence(claim_result):
                 st.warning("Passage text is unavailable.")
 
     if len(items) < 3:
-        st.caption(f"Only {len(items)} original passages available.")
+        st.caption(f"Only {len(items)} original {'passage' if len(items) == 1 else 'passages'} available.")
 
 @st.cache_resource(show_spinner="Loading Hybrid Evidence Ranking v2 (first time only)...")
 def load_evidence_ranker():
