@@ -25,14 +25,33 @@ def normalized(s):
     return re.sub(r"\s+", " ", str(s)).strip()
 
 
+
 def evidence_to_text(v):
+    """Convert source data to text while preserving key nested contexts."""
     if isinstance(v, str):
         return v
+
     if isinstance(v, dict):
-        return "\n".join(f"{k}: {evidence_to_text(val)}" for k, val in v.items())
+        lines = []
+
+        for key, value in v.items():
+            # Preserve the parent attribute for nested parking
+            # and ambience fields.
+            if key in {"BusinessParking", "Ambience"} and isinstance(value, dict):
+                for child_key, child_value in value.items():
+                    lines.append(
+                        f"{key}_{child_key}: {evidence_to_text(child_value)}"
+                    )
+            else:
+                lines.append(f"{key}: {evidence_to_text(value)}")
+
+        return "\n".join(lines)
+
     if isinstance(v, list):
         return "\n".join(evidence_to_text(x) for x in v)
+
     return "" if v is None else str(v)
+
 
 
 def structured_passages(text):
@@ -103,9 +122,33 @@ def evidence_signal(claim, passage):
             "music": ("music",),
             "intimate": ("intimate",),
         }
-        terms = aliases.get(key, (key,))
+        # Recognize nested BusinessParking and Ambience fields.
+        if key.startswith("businessparking_"):
+            subtype = key.removeprefix("businessparking_")
+
+            parking_aliases = {
+                "street": ("street parking",),
+                "garage": ("garage parking",),
+                "lot": ("parking lot", "lot parking"),
+                "valet": ("valet parking",),
+                "validated": ("validated parking",),
+            }
+
+            terms = parking_aliases.get(
+                subtype,
+                (f"{subtype} parking",)
+            )
+
+        elif key.startswith("ambience_"):
+            subtype = key.removeprefix("ambience_")
+            terms = (subtype,)
+
+        else:
+            terms = aliases.get(key, (key,))
+
         if any(term in c for term in terms):
             score += 1.0
+
     # If a claim has a year, a passage discussing dates and the same subject is useful.
     if YEAR_PATTERN.search(c) and YEAR_PATTERN.search(p) and len(overlap) >= 2:
         score += 0.6
@@ -121,7 +164,17 @@ def rank_claim(claim, passages, model, top_k=3):
     if not passages:
         return []
     try:
-        tf = TfidfVectorizer(stop_words="english", ngram_range=(1, 2)).fit_transform([claim] + passages)
+        # Split underscores for TF-IDF only.
+        # Preserve the original passages for ranking output and verification.
+        tfidf_texts = [
+            text.replace("_", " ")
+            for text in [claim] + passages
+        ]
+
+        tf = TfidfVectorizer(
+            stop_words="english",
+            ngram_range=(1, 2)
+        ).fit_transform(tfidf_texts)
         tf_scores = cosine_similarity(tf[:1], tf[1:]).flatten()
     except ValueError:
         tf_scores = np.zeros(len(passages))

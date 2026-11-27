@@ -236,7 +236,10 @@ def main() -> None:
 
         print("\nStarting Evidence-Aware Claim Verification...")
 
-        result = add_claim_verification(result)
+        result = add_claim_verification(
+            result,
+            source_info=source_info
+        )
     
     # Save the combined results
     output = Path(args.output)
