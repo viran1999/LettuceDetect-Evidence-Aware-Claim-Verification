@@ -7,6 +7,146 @@ from pathlib import Path
 from html import escape
 from typing import Any
 from lettucedetect.models.inference import HallucinationDetector
+import sys
+
+# --------------------------------------------------
+# FULL PIPELINE SETUP (added by Nayem)
+# Lets this page use the team's code:
+#   - Hybrid Evidence Ranking v2 (Viran)
+#   - Evidence-aware claim verification (Nilanga)
+# --------------------------------------------------
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+VERDICT_COLORS = {
+    "Supported": "green",
+    "Partially Supported": "orange",
+    "Contradicted": "red",
+    "Unverifiable": "gray",
+}
+
+RELATION_LABELS = {
+    "entailment": ("🟢", "agrees with the evidence"),
+    "neutral": ("🟡", "not mentioned in the evidence"),
+    "contradiction": ("🔴", "disagrees with the evidence"),
+}
+
+
+def safe_md(text) -> str:
+    # Streamlit treats $ as a math sign, so we escape it
+    return str(text).replace("$", "\\$")
+
+
+def show_original_evidence(claim_result):
+    items = claim_result.get("parent_ranked_evidence")
+    st.markdown("**Original ranked evidence**")
+
+    if not isinstance(items, list) or not items:
+        st.info("Original ranked evidence is unavailable.")
+        return
+
+    for rank, item in enumerate(items[:3], start=1):
+        passage = item if isinstance(item, str) else None
+
+        if isinstance(item, dict):
+            for key in ("evidence", "text", "passage", "paragraph", "content"):
+                value = item.get(key)
+                if isinstance(value, str) and value.strip():
+                    passage = value
+                    break
+
+        with st.expander(f"Rank {rank}"):
+            if passage:
+                st.text(passage)
+            else:
+                st.warning("Passage text is unavailable.")
+
+    if len(items) < 3:
+        st.caption(f"Only {len(items)} original {'passage' if len(items) == 1 else 'passages'} available.")
+
+@st.cache_resource(show_spinner="Loading Hybrid Evidence Ranking v2 (first time only)...")
+def load_evidence_ranker():
+    from run_baseline_evidence_integration import create_ranker
+    return create_ranker("v2")
+
+
+def run_full_pipeline(detector, context, question, answer, task):
+    # LettuceDetect -> Hybrid v2 evidence -> claim verification
+    from run_baseline_evidence_integration import analyze_record
+    from enhancements.v2_claim_verification import add_claim_verification
+
+    result = analyze_record(
+        detector=detector,
+        answer=answer,
+        source_info=context,
+        task=task,
+        question=question,
+        ranker=load_evidence_ranker(),
+        top_k=3,
+    )
+
+    # Nilanga's newer verification (bugfix/pipeline-reliability) also takes
+    # the source text. Older versions only take the result, so support both.
+    try:
+        return add_claim_verification(result, source_info=context)
+    except TypeError as error:
+        if "source_info" not in str(error):
+            raise
+        return add_claim_verification(result)
+
+
+def show_claim_card(number, item):
+    span = item.get("baseline_span", {})
+    verification = item.get("verification") or {}
+
+    with st.container(border=True):
+        st.subheader(f"Claim {number}")
+
+        st.markdown(f"🖍️ **Suspicious part:** :red[{safe_md(span.get('text', '').strip())}]")
+        confidence = span.get("confidence")
+        if isinstance(confidence, (int, float)):
+            st.write(f"Detector confidence: {confidence:.0%}")
+
+        st.markdown(f"✂️ **Claim:** {safe_md(item.get('claim', ''))}")
+
+        ranked = item.get("ranked_evidence") or []
+        if ranked:
+            st.markdown("📄 **Best evidence (Hybrid v2)**")
+            st.info(safe_md(ranked[0].get("evidence", "")))
+            if len(ranked) > 1:
+                with st.expander("See other evidence (rank 2 and 3)"):
+                    for passage in ranked[1:]:
+                        st.markdown(f"**#{passage.get('rank')}** — {safe_md(passage.get('evidence', ''))}")
+        else:
+            st.warning("No evidence was found for this claim.")
+        show_original_evidence(item)
+        st.markdown("👨‍⚖️ **Verdict**")
+        if not verification:
+            st.warning(f"No verdict: {item.get('verification_status', 'not verified')}")
+            return
+
+        category = verification.get("category") or "Needs review"
+        st.badge(category, color=VERDICT_COLORS.get(category, "blue"))
+
+        # Explain why there is no final category (newer verification code)
+        if verification.get("decision_reason"):
+            st.caption(f"Reason: {verification['decision_reason']}")
+        if verification.get("status") == "error":
+            st.warning(f"Verification error: {verification.get('error_message', 'unknown error')}")
+        st.write(
+            f"{verification.get('supported_count', 0)} of "
+            f"{verification.get('total_atomic_claims', 0)} small claims are supported by the evidence."
+        )
+
+        for piece in verification.get("atomic_verifications", []):
+            relation = piece.get("nli_relation", "")
+            icon, meaning = RELATION_LABELS.get(relation, ("⚪", relation))
+            score = piece.get("nli_scores", {}).get(relation, 0)
+            st.markdown(f"{icon} {safe_md(piece.get('atomic_claim', ''))} — *{meaning}* ({score:.0%} sure)")
+
+        if verification.get("status") == "provisional":
+            st.caption("Note: this verdict is provisional (still being improved).")
 
 
 st.set_page_config(page_title="Enhancement", page_icon="✨")
@@ -191,6 +331,13 @@ answer = st.text_area(
     ),
     height=150,
     key="improvement_answer"
+)
+
+# Task type is used by Hybrid Evidence Ranking v2 (added by Nayem)
+task_type = st.selectbox(
+    "Task type",
+    ["QA", "Summary", "Data2Txt"],
+    key="improvement_task"
 )
 
 # --------------------------------------------------
@@ -419,6 +566,52 @@ if st.button("Detect Hallucinations"):
 
             st.write("**Total Categories:**", total_categories)
 
+
+        # --------------------------------------------------
+        # EVIDENCE-AWARE CLAIM VERIFICATION (added by Nayem)
+        # Uses the team's model: Hybrid v2 + claim verification
+        # --------------------------------------------------
+        st.divider()
+        st.header("Evidence-Aware Claim Verification")
+        st.caption(
+            "LettuceDetect finds suspicious parts → Hybrid Evidence Ranking v2 "
+            "finds the best evidence → claim verification gives a verdict."
+        )
+
+        if predictions:
+            try:
+                with st.spinner("Finding evidence and verifying claims... (can take up to a minute)"):
+                    pipeline_result = run_full_pipeline(
+                        detector, context, question, answer, task_type
+                    )
+
+                claim_items = pipeline_result.get("claims_with_evidence", [])
+
+                verdict_counts = {}
+                for item in claim_items:
+                    verdict = (item.get("verification") or {}).get("category") or "Needs review"
+                    verdict_counts[verdict] = verdict_counts.get(verdict, 0) + 1
+
+                summary_columns = st.columns(len(verdict_counts) + 1)
+                summary_columns[0].metric("Claims checked", len(claim_items))
+                for column, (verdict, count) in zip(summary_columns[1:], verdict_counts.items()):
+                    column.metric(verdict, count)
+
+                for number, item in enumerate(claim_items, start=1):
+                    show_claim_card(number, item)
+
+            except Exception as pipeline_error:
+                error_text = str(pipeline_error)
+                if "11434" in error_text or "Connection refused" in error_text or "urlopen" in error_text:
+                    st.error(
+                        "Claim verification could not reach Ollama. "
+                        "Open the Ollama app and click the button again."
+                    )
+                else:
+                    st.error(f"Claim verification failed: {pipeline_error}")
+                st.exception(pipeline_error)
+        else:
+            st.info("No suspicious parts, so there are no claims to verify.")
 
     except Exception as e:
         st.error(f"Detection or saving failed: {e}")

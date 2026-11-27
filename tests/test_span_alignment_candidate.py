@@ -17,7 +17,11 @@ def test_targeted_wifi_claim():
 def test_compound_span_can_select_multiple_claims():
     result = propose_alignment(
         "Benefits include improved digestion, increased energy, and weight loss.",
-        ["Benefits include improved digestion.", "Benefits include increased energy.", "Benefits include weight loss."],
+        [
+            "Benefits include improved digestion.",
+            "Benefits include increased energy.",
+            "Benefits include weight loss.",
+        ],
     )
     assert result["status"] == "candidate_multi"
     assert len(selected(result)) == 3
