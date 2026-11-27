@@ -1,0 +1,4 @@
+method,n_examples,Precision@1,Hit@3,MRR@3,Precision@3
+TF-IDF,30,0.4333,0.5333,0.4778,0.4444
+Semantic,30,0.4333,0.5333,0.4833,0.4111
+Hybrid,30,0.4333,0.5333,0.4778,0.4111

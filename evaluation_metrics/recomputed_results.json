@@ -1,0 +1,171 @@
+{
+  "description": "Recalculated from source CSV rows; no plotted numerical results hardcoded.",
+  "limitations": "AI-assisted relevance labels; development data; retrieval not hallucination-detection accuracy.",
+  "sources": {
+    "preliminary": {
+      "filename": "evidence_ranking_review_compact_rated.csv",
+      "sha256": "07ece4f90cfd3226ba2b79994c1b587b21d948f5dc0c5c8684733022e3254f5a"
+    },
+    "paired": {
+      "filename": "LettuceDetect_v1_v2_AI_paired_claims.csv",
+      "sha256": "a7b5fb90cdefc3205b0120002f4c7f25cb8618cb2e5905109287cb7993515800"
+    },
+    "judgments": {
+      "filename": "LettuceDetect_v1_v2_AI_relevance_review.csv",
+      "sha256": "02b3de90e9ed9c07ef482bba0a8e55dfbeb518193ee2209b8dc740315897b13a"
+    }
+  },
+  "preliminary": {
+    "TF-IDF": {
+      "n": 30,
+      "p_at_1": 0.43333333333333335,
+      "hit_at_3": 0.5333333333333333,
+      "mrr_at_3": 0.4777777777777778,
+      "p_at_3": 0.4444444444444445
+    },
+    "Semantic": {
+      "n": 30,
+      "p_at_1": 0.43333333333333335,
+      "hit_at_3": 0.5333333333333333,
+      "mrr_at_3": 0.48333333333333334,
+      "p_at_3": 0.41111111111111115
+    },
+    "Hybrid": {
+      "n": 30,
+      "p_at_1": 0.43333333333333335,
+      "hit_at_3": 0.5333333333333333,
+      "mrr_at_3": 0.4777777777777778,
+      "p_at_3": 0.41111111111111115
+    }
+  },
+  "paired": {
+    "ALL": {
+      "n_claims": 88,
+      "n_sources": 88,
+      "metrics": {
+        "Precision@1": {
+          "v1": 0.6818181818181818,
+          "v2": 0.8181818181818182
+        },
+        "Hit@3": {
+          "v1": 0.875,
+          "v2": 0.9204545454545454
+        },
+        "MRR@3": {
+          "v1": 0.7727261363636363,
+          "v2": 0.8693181818181818
+        },
+        "Precision@3": {
+          "v1": 0.5303030303030303,
+          "v2": 0.6856060606060606
+        }
+      }
+    },
+    "QA": {
+      "n_claims": 24,
+      "n_sources": 24,
+      "metrics": {
+        "Precision@1": {
+          "v1": 0.4583333333333333,
+          "v2": 0.7083333333333334
+        },
+        "Hit@3": {
+          "v1": 0.6666666666666666,
+          "v2": 0.7083333333333334
+        },
+        "MRR@3": {
+          "v1": 0.5555541666666667,
+          "v2": 0.7083333333333334
+        },
+        "Precision@3": {
+          "v1": 0.375,
+          "v2": 0.4444444444444444
+        }
+      }
+    },
+    "Data2Txt": {
+      "n_claims": 40,
+      "n_sources": 40,
+      "metrics": {
+        "Precision@1": {
+          "v1": 0.65,
+          "v2": 0.775
+        },
+        "Hit@3": {
+          "v1": 0.925,
+          "v2": 1.0
+        },
+        "MRR@3": {
+          "v1": 0.779165,
+          "v2": 0.8875
+        },
+        "Precision@3": {
+          "v1": 0.475,
+          "v2": 0.75
+        }
+      }
+    },
+    "Summary": {
+      "n_claims": 24,
+      "n_sources": 24,
+      "metrics": {
+        "Precision@1": {
+          "v1": 0.9583333333333334,
+          "v2": 1.0
+        },
+        "Hit@3": {
+          "v1": 1.0,
+          "v2": 1.0
+        },
+        "MRR@3": {
+          "v1": 0.9791666666666666,
+          "v2": 1.0
+        },
+        "Precision@3": {
+          "v1": 0.7777777777777778,
+          "v2": 0.8194444444444445
+        }
+      }
+    }
+  },
+  "relevance_judgments": {
+    "0": 205,
+    "1": 318,
+    "U": 24
+  },
+  "winner_at_1": {
+    "tie": 68,
+    "v2": 16,
+    "v1": 4
+  },
+  "bootstrap_95ci": {
+    "Precision@1": {
+      "delta": 0.13636363636363646,
+      "ci_low": 0.045454545454545414,
+      "ci_high": 0.2272727272727273,
+      "bootstrap_resamples": 5000,
+      "seed": 20261101
+    },
+    "Hit@3": {
+      "delta": 0.045454545454545414,
+      "ci_low": 0.011363636363636354,
+      "ci_high": 0.09090909090909094,
+      "bootstrap_resamples": 5000,
+      "seed": 20261101
+    },
+    "MRR@3": {
+      "delta": 0.09659204545454547,
+      "ci_low": 0.03787954545454553,
+      "ci_high": 0.1571988636363637,
+      "bootstrap_resamples": 5000,
+      "seed": 20261101
+    },
+    "Precision@3": {
+      "delta": 0.15530303030303028,
+      "ci_low": 0.07954545454545459,
+      "ci_high": 0.23106060606060613,
+      "bootstrap_resamples": 5000,
+      "seed": 20261101
+    }
+  }
+}
